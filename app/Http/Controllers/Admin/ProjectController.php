@@ -55,6 +55,7 @@ class ProjectController extends Controller
 
         // Remove gallery placeholder from attributes; handled separately
         unset($validated['gallery']);
+        unset($validated['thumbnail']);
 
         $project = Project::create($validated);
 
@@ -111,6 +112,7 @@ class ProjectController extends Controller
         }
 
         unset($validated['gallery']);
+        unset($validated['thumbnail']);
 
         $project->update($validated);
 

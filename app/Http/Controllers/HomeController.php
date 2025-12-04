@@ -53,19 +53,17 @@ class HomeController extends Controller
     {
         $categoryOrder = ['Professional', 'Academic', 'Program', 'Organizational'];
 
-        $orderedExperiences = Experience::orderByDesc('start_date')
+        $grouped = Experience::orderByDesc('start_date')
             ->orderByDesc('end_date')
             ->get()
-            ->groupBy(fn ($exp) => $exp->category ?? 'Professional');
+            ->groupBy(fn ($exp) => $exp->category ?? 'Professional')
+            ->map->values();
 
-        $experiences = collect($categoryOrder)
-            ->mapWithKeys(fn ($category) => [
-                $category => $orderedExperiences->get($category, collect())->values(),
-            ])
-            ->filter(fn ($items) => $items->isNotEmpty())
-            ->merge(
-                $orderedExperiences->except($categoryOrder)
-            );
+        $ordered = collect($categoryOrder)
+            ->filter(fn ($cat) => $grouped->has($cat))
+            ->mapWithKeys(fn ($cat) => [$cat => $grouped->get($cat)]);
+
+        $experiences = $ordered->union($grouped->except($categoryOrder));
 
         $educations = Education::orderBy('start_date', 'desc')->get();
         return view('career', compact('experiences', 'educations'));
