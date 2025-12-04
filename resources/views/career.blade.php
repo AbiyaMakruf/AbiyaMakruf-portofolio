@@ -18,7 +18,7 @@
                         </div>
                         <div class="space-y-8 border-l-2 border-slate-100 pl-8 ml-4">
                             @foreach($items as $experience)
-                                <a href="{{ route('career.show', $experience) }}" class="block relative group">
+                                <a href="{{ route('career.show', $experience->slug ?? $experience) }}" class="block relative group">
                                     <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-white bg-[#00B3DB] group-hover:bg-[#0A7396] transition"></span>
                                     <div class="rounded-xl border border-slate-100 bg-white/60 p-4 shadow-sm transition group-hover:-translate-y-1 group-hover:shadow-md">
                                         <div class="flex gap-4">

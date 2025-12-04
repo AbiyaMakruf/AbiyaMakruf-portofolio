@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Filesystem\FilesystemAdapter;
 use League\Flysystem\Filesystem;
-use Google\Cloud\Storage\StorageClient;
 use League\Flysystem\GoogleCloudStorage\GoogleCloudStorageAdapter;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,35 +29,37 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        Storage::extend('gcs', function ($app, $config) {
-            $storageClient = new StorageClient([
-                'projectId' => $config['project_id'],
-                'keyFile' => $config['key_file'],
-            ]);
+        if (class_exists(\Google\Cloud\Storage\StorageClient::class)) {
+            Storage::extend('gcs', function ($app, $config) {
+                $storageClient = new \Google\Cloud\Storage\StorageClient([
+                    'projectId' => $config['project_id'],
+                    'keyFile' => $config['key_file'],
+                ]);
 
-            $bucket = $storageClient->bucket($config['bucket']);
-            $adapter = new GoogleCloudStorageAdapter($bucket);
-            $filesystem = new Filesystem($adapter);
+                $bucket = $storageClient->bucket($config['bucket']);
+                $adapter = new GoogleCloudStorageAdapter($bucket);
+                $filesystem = new Filesystem($adapter);
 
-            return new class($filesystem, $adapter, $config, $bucket) extends FilesystemAdapter {
-                protected $bucket;
+                return new class($filesystem, $adapter, $config, $bucket) extends FilesystemAdapter {
+                    protected $bucket;
 
-                public function __construct($driver, $adapter, $config, $bucket)
-                {
-                    parent::__construct($driver, $adapter, $config);
-                    $this->bucket = $bucket;
-                }
+                    public function __construct($driver, $adapter, $config, $bucket)
+                    {
+                        parent::__construct($driver, $adapter, $config);
+                        $this->bucket = $bucket;
+                    }
 
-                public function url($path)
-                {
-                    return $this->config['url'] . '/' . ltrim($path, '/');
-                }
+                    public function url($path)
+                    {
+                        return $this->config['url'] . '/' . ltrim($path, '/');
+                    }
 
-                public function temporaryUrl($path, $expiration, array $options = [])
-                {
-                    return $this->bucket->object($path)->signedUrl($expiration, $options);
-                }
-            };
-        });
+                    public function temporaryUrl($path, $expiration, array $options = [])
+                    {
+                        return $this->bucket->object($path)->signedUrl($expiration, $options);
+                    }
+                };
+            });
+        }
     }
 }
