@@ -1,0 +1,127 @@
+## DATA PRIBADI
+[cite_start]NAMA: MUHAMMAD ABIYA MAKRUF [cite: 107]
+[cite_start]KONTAK: +62 82127180662 | aabbiiyyaa@gmail.com [cite: 108]
+[cite_start]LinkedIn: www.linkedin.com/in/AbiyaMakruf [cite: 108]
+[cite_start]GitHub: https://github.com/AbiyaMakruf [cite: 108]
+PROFIL SINGKAT: Master's Student in Informatics | Backend & Cloud Enthusiast | [cite_start]Computer Vision & Data Analytics Focus [cite: 108, 109]
+
+## PENGALAMAN (Experiences)
+
+### [cite_start]Freelance Data & Computer Vision [cite: 112]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 111]
+[cite_start]Periode: Jan 2025 - Sep 2025 [cite: 113]
+[cite_start]Deskripsi: Self-directed freelance work delivering data analytics and computer vision solutions for clients in sports analytics and retail sectors. [cite: 114]
+* [cite_start]Tarkam Football Analytics Project: Developed a computer vision pipeline for player detection and tracking using public and proprietary datasets. [cite: 115]
+* [cite_start]Generated detailed per-player statistics such as heatmaps, movement trajectories, and spatial activity visualizations. [cite: 116]
+* [cite_start]Fashion Retail Sales Dashboard: Designed and implemented a Power BI dashboard for a fashion store to analyze yearly sales performance. [cite: 117]
+* [cite_start]Enabled insights on best-selling products, top-spending customers, and profit-maximizing items. [cite: 118]
+
+### [cite_start]Internship - PT Toyota Astra Motor [cite: 120]
+[cite_start]Lokasi: Jakarta, Indonesia [cite: 119]
+[cite_start]Periode: Aug 2024 - Sep 2024 [cite: 121]
+[cite_start]Deskripsi Perusahaan: Official distributor of Toyota vehicles in Indonesia, focusing on automotive sales, service, and innovation, implementing digital transformation across operational areas. [cite: 122]
+* [cite_start]Developed a series of interactive dashboards for fixed asset management and analysis, improving data-driven decision-making processes within the organization. [cite: 123]
+* [cite_start]Built a real-time asset movement tracker, allowing the company to monitor and control asset flows efficiently across departments. [cite: 124]
+* [cite_start]Designed a dashboard to compare and reconcile data between the Fixed Asset Management System (FAMS) and SAP. [cite: 125]
+
+### [cite_start]Research Internship - Solafune Inc. [cite: 127]
+[cite_start]Lokasi: Sumida City, Tokyo [cite: 126]
+[cite_start]Periode: Apr 2024 - Jun 2024 [cite: 128]
+[cite_start]Deskripsi Perusahaan: Geospatial technology company specializing in satellite imagery analysis for diverse sectors. [cite: 129]
+* [cite_start]Contributed to a machine learning project focused on detecting and masking solar panels from Sentinel-2 satellite imagery, utilizing all 13 spectral bands. [cite: 130]
+* [cite_start]Applied deep learning and image processing techniques to improve the accuracy and efficiency of solar panel detection in multi-band remote sensing data. [cite: 131]
+
+### [cite_start]Bangkit 2024 H1 Cohort - Machine Learning Path [cite: 133]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 132]
+[cite_start]Periode: Feb 2024 - Jun 2024 [cite: 134]
+[cite_start]Deskripsi Program: Career readiness program initiated by Google, GoTo, and Traveloka, equipping participants with in-demand technical and soft skills. [cite: 135, 136]
+* [cite_start]Graduated with Distinction in the Machine Learning path. [cite: 137]
+* [cite_start]Selected for the Capstone Company Path, collaborating with Solafune Inc. (Japan) on a real-world project. [cite: 138]
+
+### [cite_start]Asisstant Practicum - Informatics Laboratory - Telkom University [cite: 141]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 139, 140]
+[cite_start]Periode: Sep 2022 - May 2025 [cite: 142]
+[cite_start]Deskripsi: Assisted in preparing and delivering lab sessions, conducting tutorials, grading practical assignments and exams, and providing hands-on academic support. [cite: 143]
+* [cite_start]Asisten untuk mata kuliah: Programming Algorithms Assistant, Data Structures Assistant, Computer Networks Assistant, Object-Oriented Programming Assistant, Fundamentals of Artificial Intelligence Assistant. [cite: 144]
+
+### [cite_start]Assistant Lecturer - Faculty of Informatics - Telkom University [cite: 146]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 145]
+[cite_start]Periode: Sep 2022 - Present [cite: 147]
+[cite_start]Deskripsi: Assisted in delivering undergraduate courses by conducting tutorials, grading assignments and exams, preparing teaching materials, and supporting students academically. [cite: 148]
+* [cite_start]Asisten untuk mata kuliah: Calculus Assistant and Advanced Calculus Assistant (2022/2023-2024/2025). [cite: 149]
+* [cite_start]Asisten untuk mata kuliah: Data Structures Assistant, Software Engineering Implementation Assistant, Object-Oriented Programming Assistant, Platform-Based Application Development Assistant. [cite: 150]
+
+### [cite_start]Digistar 2023 Graduate [cite: 153]
+[cite_start]Lokasi: Jakarta, Indonesia [cite: 151]
+[cite_start]Periode: Jun 2023 - Sep 2023 [cite: 152]
+[cite_start]Deskripsi Program: A national technology talent development program by Telkom Indonesia. [cite: 154]
+* Completed the Backend Development learning path. [cite_start]Participated in hands-on projects and collaborative learning sessions. [cite: 156]
+
+### [cite_start]Full Stack Developer - Event Horizon [cite: 160]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 158]
+[cite_start]Periode: Jul 2020 - Jul 2022 [cite: 159]
+[cite_start]Deskripsi Perusahaan: A vendor engaged in website development services for event needs, organizations, etc. [cite: 161]
+* [cite_start]Developed and maintained full-stack websites for F2WL events (official website, tournament platform, and online store). [cite: 162]
+
+### [cite_start]GDSC ITB Graduate - Google Developer Student Clubs [cite: 165]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 163]
+[cite_start]Periode: Sep 2021 - Jan 2022 [cite: 164]
+[cite_start]Deskripsi Komunitas: Student-led community supported by Google Developers. [cite: 166]
+* [cite_start]Actively participated in workshops, coding sessions, and tech talks hosted by GDSC ITB. [cite: 167]
+
+## PENDIDIKAN (Education Level)
+
+### [cite_start]Master of Informatics [cite: 170]
+[cite_start]Institusi: Telkom University - Kabupaten Bandung, Indonesia [cite: 169]
+[cite_start]IPK: 3.94/4.00 [cite: 170]
+* [cite_start]Conference Paper Publication at ICODSA 2025. [cite: 171]
+* [cite_start]Journal Paper Publication at Lontar Komputer 2025. [cite: 172]
+
+### [cite_start]Bachelor of Informatics [cite: 175]
+[cite_start]Institusi: Telkom University - Kabupaten Bandung, Indonesia [cite: 173, 174]
+[cite_start]IPK: 3.96/4.00 [cite: 175]
+* [cite_start]2nd Place, FindIT Hackathon - Universitas Gadjah Mada, 2023. [cite: 176]
+* [cite_start]4th Place, Hackfest Universitas Ciputra. [cite: 177]
+* [cite_start]Conference Paper Publication at ICICYTA 2024. [cite: 178]
+
+### [cite_start]Senior High School [cite: 180]
+[cite_start]Institusi: SMA Negeri 2 Bandung, Indonesia [cite: 179, 181]
+* [cite_start]Achieved the highest school exam score in the Class of 2021. [cite: 182]
+
+## PENGALAMAN ORGANISASI (Organisational Experience)
+
+### [cite_start]Volunteer - Editorial and Event Team - 3rd International Conference (ICOSEIT) [cite: 185, 184]
+[cite_start]Periode: Sep 2025 - Oct 2025 [cite: 189]
+[cite_start]Tema Konferensi: "Navigating the Questionable Future for Software Engineering & Information Technology". [cite: 190]
+* [cite_start]Contributed to the Editorial Team by proofreading and formatting conference materials, ensuring consistency and quality of published content. [cite: 191]
+* [cite_start]Contributed as co-host, guiding participants and session chairs in conducting onsite presentations. [cite: 192]
+
+### [cite_start]Volunteer - Program and Editorial Team - 13th International Conference (ICOICT) [cite: 194, 193]
+[cite_start]Lokasi: Bandung, Indonesia [cite: 193]
+[cite_start]Periode: Jul 2025 [cite: 195]
+[cite_start]Tema Konferensi: "Driving a Sustainable Future with Al, loT, and Data Science Technologies." [cite: 196]
+* [cite_start]Assisted the Program Team in managing conference sessions. [cite: 197]
+* [cite_start]Contributed to the Editorial Team by proofreading and formatting conference materials, ensuring consistency and quality of published content. [cite: 198]
+
+## [cite_start]SKILLS, ACHIEVEMENTS & CERTIFICATE [cite: 199]
+
+### Prestasi (Achievements)
+* [cite_start]2nd Place Winner - Hackathon competition organized by KMTETI, Universitas Gadjah Mada (UGM) (2023). [cite: 200]
+* [cite_start]Finalist (4th Place) - Hackathon competition organized by Universitas Ciputra Surabaya (2023). [cite: 200]
+* [cite_start]Achieved the highest school exam scores at SMA Negeri 2 Bandung, Class of 2021 (2021). [cite: 201, 203]
+
+### Proyek (Projects)
+* [cite_start]Sensevis (2024): Machine learning models that can detect and mask solar panels from sentinel-2 13-band tiff images. [cite: 202, 204]
+* [cite_start]Planties (2023): Mobile application that help you to manage plants. [cite: 205, 206]
+
+### [cite_start]Soft Skills [cite: 207]
+* [cite_start]Time management [cite: 207]
+* [cite_start]Leadership [cite: 207]
+* [cite_start]Organizing activities [cite: 207]
+
+### Technical Skills
+* [cite_start]Programming Languages: Python, JavaScript, PHP, C++, Java. [cite: 208]
+* [cite_start]Frameworks & Libraries: TensorFlow, PyTorch, YOLO, Roboflow, MLflow, Dagshub. [cite: 209]
+* [cite_start]MLOps & DevOps: Docker, Kubernetes, GitHub Actions, Jenkins, RunPod, Prometheus, Grafana. [cite: 210]
+* [cite_start]Data & BI Tools: Power BI. [cite: 211]
+* [cite_start]Cloud Services: Google Cloud Platform, Amazon Web Services, Microsoft Azure. [cite: 212]

@@ -3,10 +3,10 @@
 ### ===========================
 ### CONFIG
 ### ===========================
-SERVICE_NAME="abiya-makruf-landing-page"
+SERVICE_NAME="abiya-makruf-portofolio"
 PROJECT_ID="tracker-expenses-478512"
 REGION="asia-southeast1"
-REPO="abiya-makruf-landing-page"
+REPO="abiya-makruf-portofolio"
 IMAGE="app"
 
 # Tag otomatis berdasarkan waktu (opsional)
