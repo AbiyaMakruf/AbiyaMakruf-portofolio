@@ -64,6 +64,24 @@
                         @if($contactPhone)<div>Phone: <a href="tel:{{ $contactPhone }}" class="text-[#00B3DB] hover:underline">{{ $contactPhone }}</a></div>@endif
                         @if($contactLocation)<div>Location: {{ $contactLocation }}</div>@endif
                     </div>
+                    @php
+                        $socials = \App\Models\SocialLink::allSafe();
+                    @endphp
+                    @if($socials->isNotEmpty())
+                        <div class="flex flex-wrap items-center gap-3 pt-3">
+                            @foreach($socials as $social)
+                                <a href="{{ $social->url }}" target="_blank" class="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-[#00B3DB] hover:shadow-md transition">
+                                    @if($social->icon_path)
+                                        <img src="{{ $social->icon_path }}" alt="{{ $social->platform }}" class="h-6 w-6 object-contain">
+                                    @elseif($social->icon_class)
+                                        <span class="{{ $social->icon_class }} text-xl text-slate-600 group-hover:text-[#00B3DB]"></span>
+                                    @else
+                                        <span class="text-sm font-semibold text-slate-600 group-hover:text-[#00B3DB]">{{ \Illuminate\Support\Str::substr($social->platform,0,2) }}</span>
+                                    @endif
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

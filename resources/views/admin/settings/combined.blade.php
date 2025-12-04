@@ -22,45 +22,59 @@
                         <h2 class="text-xl font-bold text-slate-900">Social Links</h2>
                         <p class="text-sm text-slate-500">Links displayed on your site.</p>
                     </div>
-                    <form action="{{ route('admin.socials.store') }}" method="POST" class="flex gap-2">
+                    <form action="{{ route('admin.socials.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 md:flex-row md:items-center">
                         @csrf
-                        <input type="text" name="platform" placeholder="Platform" required class="rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        <input type="url" name="url" placeholder="https://..." required class="rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        <button type="submit" class="rounded-lg bg-[#00B3DB] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">Add</button>
+                        <input type="text" name="platform" placeholder="Platform" required class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
+                        <input type="url" name="url" placeholder="https://..." required class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
+                        <input type="text" name="icon_class" placeholder="Icon class (optional)" class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
+                        <input type="file" name="icon" accept="image/*" class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
+                        <button type="submit" class="rounded-lg bg-[#00B3DB] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0A7396] w-full md:w-auto">Add</button>
                     </form>
                 </div>
 
                 <div class="overflow-hidden rounded-xl border border-slate-100">
-                    <table class="w-full text-left text-sm text-slate-700">
-                        <thead class="bg-slate-50 text-xs uppercase text-slate-500">
-                            <tr>
-                                <th class="px-4 py-3">Platform</th>
-                                <th class="px-4 py-3">URL</th>
-                                <th class="px-4 py-3 text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            @forelse($socials as $social)
-                                <tr class="hover:bg-slate-50/70">
-                                    <td class="px-4 py-3 font-medium text-slate-900">{{ $social->platform }}</td>
-                                    <td class="px-4 py-3 text-slate-600">
-                                        <a href="{{ $social->url }}" target="_blank" class="text-[#00B3DB] hover:text-[#0A7396]">{{ $social->url }}</a>
-                                    </td>
-                                    <td class="px-4 py-3 text-right">
-                                        <form action="{{ route('admin.socials.destroy', $social->id) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" data-confirm="Delete this link?" class="text-red-600 hover:text-red-800 text-sm font-semibold">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[720px] text-left text-sm text-slate-700">
+                            <thead class="bg-slate-50 text-xs uppercase text-slate-500">
                                 <tr>
-                                    <td colspan="3" class="px-4 py-6 text-center text-slate-500">No social links added yet.</td>
+                                    <th class="px-4 py-3">Platform</th>
+                                    <th class="px-4 py-3">URL</th>
+                                    <th class="px-4 py-3">Icon</th>
+                                    <th class="px-4 py-3 text-right">Actions</th>
                                 </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                @forelse($socials as $social)
+                                    <tr class="hover:bg-slate-50/70">
+                                        <td class="px-4 py-3 font-medium text-slate-900">{{ $social->platform }}</td>
+                                        <td class="px-4 py-3 text-slate-600">
+                                            <a href="{{ $social->url }}" target="_blank" class="text-[#00B3DB] hover:text-[#0A7396]">{{ $social->url }}</a>
+                                        </td>
+                                        <td class="px-4 py-3">
+                                            @if($social->icon_path)
+                                                <img src="{{ $social->icon_path }}" alt="{{ $social->platform }}" class="h-8 w-8 rounded-lg object-contain border border-slate-200">
+                                            @elseif($social->icon_class)
+                                                <span class="{{ $social->icon_class }}"></span>
+                                            @else
+                                                <span class="text-xs text-slate-400">—</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            <form action="{{ route('admin.socials.destroy', $social->id) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" data-confirm="Delete this link?" class="text-red-600 hover:text-red-800 text-sm font-semibold">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-6 text-center text-slate-500">No social links added yet.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 

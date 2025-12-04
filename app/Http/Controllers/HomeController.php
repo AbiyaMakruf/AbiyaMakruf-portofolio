@@ -85,24 +85,29 @@ class HomeController extends Controller
         $latest = CvFile::where('is_active', true)->latest()->first()
             ?? CvFile::latest()->first();
 
-        if ($latest && $latest->file_path) {
-            $diskName = config('filesystems.disks.gcs') ? 'gcs' : 'public';
+        if (!$latest || !$latest->file_path) {
+            return back()->with('error', 'CV file not found.');
+        }
 
-            // Prefer precomputed public URL when on GCS
-            if ($diskName === 'gcs' && $latest->public_url) {
-                return redirect()->away($latest->public_url);
-            }
-
-            // Otherwise try direct download from disk
-            if (Storage::disk($diskName)->exists($latest->file_path)) {
-                return Storage::disk($diskName)->download($latest->file_path, 'Abiya_Makruf_CV.pdf');
+        // Force download from GCS when possible
+        $disk = Storage::disk('gcs');
+        if ($disk->exists($latest->file_path)) {
+            $stream = $disk->readStream($latest->file_path);
+            if ($stream) {
+                return response()->streamDownload(
+                    function () use ($stream) {
+                        fpassthru($stream);
+                        fclose($stream);
+                    },
+                    'Abiya_Makruf_CV.pdf',
+                    ['Content-Type' => 'application/pdf']
+                );
             }
         }
 
-        // Legacy fallback
-        $path = base_path('readme/cv.pdf');
-        if (file_exists($path)) {
-            return response()->download($path, 'Abiya_Makruf_CV.pdf');
+        // Fallback to public URL redirect if streaming fails
+        if ($latest->public_url) {
+            return redirect()->away($latest->public_url);
         }
 
         return back()->with('error', 'CV file not found.');

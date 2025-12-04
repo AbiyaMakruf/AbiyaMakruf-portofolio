@@ -30,9 +30,20 @@
                     Download CV
                 </a>
                 @auth
-                    <a href="{{ route('admin.dashboard') }}" class="text-sm font-medium text-slate-600 hover:text-[#00B3DB]">Dashboard</a>
+                    <a href="{{ route('admin.dashboard') }}" class="hidden md:inline-block text-sm font-medium text-slate-600 hover:text-[#00B3DB]">Dashboard</a>
                 @else
                     <a href="{{ route('login') }}" class="text-sm font-medium text-slate-600 hover:text-[#00B3DB]">Login</a>
+                @endauth
+            </div>
+            <div class="flex items-center gap-2 md:hidden">
+                <a href="{{ route('cv.download') }}" class="inline-flex items-center gap-2 rounded-full bg-[#0A7396] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-[#0A7396]/15 transition hover:bg-[#125C78]">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
+                    Download CV
+                </a>
+                @auth
+                    <a href="{{ route('admin.dashboard') }}" class="text-xs font-semibold text-slate-600 hover:text-[#00B3DB]">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="text-xs font-semibold text-slate-600 hover:text-[#00B3DB]">Login</a>
                 @endauth
             </div>
         </div>
@@ -72,21 +83,9 @@
     <footer class="bg-white py-12 text-center text-sm text-slate-500 border-t border-slate-100 pb-24 md:pb-12">
         <div class="mx-auto max-w-7xl px-6">
             <div class="flex justify-center gap-6 mb-4">
-                @foreach(\App\Models\SocialLink::all() as $social)
+                @foreach(\App\Models\SocialLink::allSafe() as $social)
                     <a href="{{ $social->url }}" target="_blank" class="text-slate-400 hover:text-[#00B3DB]">{{ $social->platform }}</a>
                 @endforeach
-            </div>
-            @php
-                $contactEmail = \App\Models\SiteSetting::where('key','contact_email')->value('value');
-                $contactEmailUni = \App\Models\SiteSetting::where('key','contact_email_university')->value('value');
-                $contactPhone = \App\Models\SiteSetting::where('key','contact_phone')->value('value');
-                $contactLocation = \App\Models\SiteSetting::where('key','contact_location')->value('value');
-            @endphp
-            <div class="flex flex-col items-center gap-1 text-slate-500 text-sm">
-                @if($contactEmail)<span>Email: {{ $contactEmail }}</span>@endif
-                @if($contactEmailUni)<span>Campus: {{ $contactEmailUni }}</span>@endif
-                @if($contactPhone)<span>Phone: {{ $contactPhone }}</span>@endif
-                @if($contactLocation)<span>Location: {{ $contactLocation }}</span>@endif
             </div>
             <p>&copy; {{ date('Y') }} Abiya Makruf. Built with Laravel & Gemini.</p>
         </div>

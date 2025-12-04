@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\SocialLink;
 use App\Models\SiteSetting;
@@ -28,9 +29,18 @@ class SocialLinkController extends Controller
         $request->validate([
             'platform' => 'required|string|max:255',
             'url' => 'required|url|max:255',
+            'icon' => 'nullable|image|max:2048',
+            'icon_class' => 'nullable|string|max:255',
         ]);
 
-        SocialLink::create($request->all());
+        $data = $request->only(['platform', 'url', 'icon_class']);
+
+        if ($request->hasFile('icon')) {
+            $path = $request->file('icon')->store('socials/icons', 'gcs');
+            $data['icon_path'] = Storage::disk('gcs')->url($path);
+        }
+
+        SocialLink::create($data);
 
         return back()->with('success', 'Social link added successfully.');
     }
