@@ -60,6 +60,25 @@ return [
             'report' => false,
         ],
 
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GCS_PROJECT_ID'),
+            // Prefer inline credentials when key file path not provided
+            'key_file' => env('GCS_KEY_FILE_PATH') ?: [
+                'type' => 'service_account',
+                'project_id' => env('GCS_PROJECT_ID'),
+                'client_email' => env('GOOGLE_CLOUD_CLIENT_EMAIL'),
+                'private_key' => env('GOOGLE_CLOUD_PRIVATE_KEY') ? str_replace('\\n', "\n", env('GOOGLE_CLOUD_PRIVATE_KEY')) : null,
+            ],
+            'bucket' => env('GCS_BUCKET'),
+            'url' => 'https://storage.googleapis.com/' . env('GCS_BUCKET'),
+            'path_prefix' => env('GCS_PATH_PREFIX'), // Optional: /prefix/to/file
+            'storage_api_uri' => env('GCS_STORAGE_API_URI'), // Optional: custom API URI
+            'visibility' => 'public', // Optional: public or private
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*
