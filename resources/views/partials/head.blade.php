@@ -13,35 +13,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <style>[x-cloak]{display:none !important;}</style>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
-<style>
-    /* Fallback visibility for admin sidebar on mobile when Flux JS is not initialised */
-    [data-flux-sidebar].fallback-open {
-        transform: translateX(0) !important;
-        display: block !important;
-    }
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.querySelector('[data-flux-sidebar]');
-    const toggles = document.querySelectorAll('[data-flux-sidebar-toggle]');
-
-    if (!sidebar || toggles.length === 0) return;
-
-    const toggleSidebar = () => {
-        sidebar.classList.toggle('fallback-open');
-    };
-
-    toggles.forEach(btn => {
-        btn.addEventListener('click', toggleSidebar);
-    });
-
-    // Close on backdrop click if flux backdrop is present
-    const backdrop = document.querySelector('[data-flux-sidebar-backdrop]');
-    if (backdrop) {
-        backdrop.addEventListener('click', () => sidebar.classList.remove('fallback-open'));
-    }
-});
-</script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.createElement('div');
