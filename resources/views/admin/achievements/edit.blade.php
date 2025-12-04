@@ -24,9 +24,15 @@
                         @error('date') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Certificate URL (optional)</label>
-                        <input type="url" name="certificate_url" value="{{ old('certificate_url', $achievement->certificate_url) }}" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
-                        @error('certificate_url') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                        <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Certificate (optional)</label>
+                        @if($achievement->certificate_url)
+                            <div class="mb-2 text-sm">
+                                <a href="{{ $achievement->certificate_url }}" target="_blank" class="text-[#00B3DB] hover:underline">View current certificate</a>
+                            </div>
+                        @endif
+                        <input type="file" name="certificate" accept="image/*,.pdf" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+                        <p class="text-xs text-slate-500 mt-1">Upload to replace the existing certificate.</p>
+                        @error('certificate') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
                         <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Hero Image</label>

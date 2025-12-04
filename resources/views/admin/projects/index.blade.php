@@ -1,17 +1,18 @@
 <x-layouts.app title="Manage Projects">
     <div class="p-6">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
             <div>
                 <p class="text-xs uppercase tracking-[0.2em] text-[#00B3DB]">Projects</p>
                 <h1 class="text-2xl font-bold text-[#125C78]">Projects</h1>
                 <p class="text-sm text-slate-500">Manage published and draft case studies.</p>
             </div>
-            <a href="{{ route('admin.projects.create') }}" class="rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-[#0A7396]">
+            <a href="{{ route('admin.projects.create') }}" class="w-full sm:w-auto text-center rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-[#0A7396]">
                 + Add Project
             </a>
         </div>
 
         <div class="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm">
+            <div class="overflow-x-auto">
             <table class="w-full text-left text-sm text-slate-700">
                 <thead class="bg-slate-50 text-xs uppercase text-slate-500">
                     <tr>
@@ -47,6 +48,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
         <div class="mt-4">
             {{ $projects->links() }}

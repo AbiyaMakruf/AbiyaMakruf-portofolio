@@ -7,13 +7,13 @@
         $indicator = fn($column) => $currentSort === $column ? ($currentDir === 'asc' ? '↑' : '↓') : '';
     @endphp
     <div class="p-6">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
             <div>
                 <p class="text-xs uppercase tracking-[0.2em] text-[#00B3DB]">Skills</p>
                 <h1 class="text-2xl font-bold text-[#125C78]">Skills Management</h1>
                 <p class="text-sm text-slate-500">Update the stacks and tools shown on the main site.</p>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <form method="GET" action="{{ route('admin.skills.index') }}" class="flex items-center gap-2 text-sm">
                     <input type="hidden" name="sort" value="{{ $currentSort }}">
                     <input type="hidden" name="dir" value="{{ $currentDir }}">
@@ -24,13 +24,14 @@
                         @endforeach
                     </select>
                 </form>
-                <a href="{{ route('admin.skills.create') }}" class="rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-[#0A7396]">
+                <a href="{{ route('admin.skills.create') }}" class="w-full sm:w-auto text-center rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-[#0A7396]">
                     + Add Skill
                 </a>
             </div>
         </div>
 
         <div class="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm">
+            <div class="overflow-x-auto">
             <table class="w-full text-left text-sm text-slate-700">
                 <thead class="bg-slate-50 text-xs uppercase text-slate-500">
                     <tr>
@@ -70,6 +71,10 @@
                                 <form action="{{ route('admin.skills.destroy', $skill) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
+                                    <input type="hidden" name="per_page" value="{{ request('per_page', $perPage) }}">
+                                    <input type="hidden" name="sort" value="{{ request('sort', $currentSort) }}">
+                                    <input type="hidden" name="dir" value="{{ request('dir', $currentDir) }}">
+                                    <input type="hidden" name="page" value="{{ request('page', 1) }}">
                                     <button type="button" data-confirm="Delete this skill?" class="text-red-600 hover:text-red-900 font-semibold">Delete</button>
                                 </form>
                             </td>
@@ -81,6 +86,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
         <div class="mt-4">
             {{ $skills->links() }}

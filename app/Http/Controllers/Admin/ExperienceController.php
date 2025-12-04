@@ -77,7 +77,7 @@ class ExperienceController extends Controller
 
         $experience->update($data);
 
-        return redirect()->route('admin.experiences.index')->with('success', 'Experience updated.');
+        return back()->with('success', 'Experience updated.');
     }
 
     /**

@@ -1,0 +1,53 @@
+- pada page admin/cv Ketika saya menekan tombol "Upload to GCS" terdapat error: SQLSTATE[42703]: Undefined column: 7 ERROR: column "public_url" of relation "cv_files" does not exist LINE 1: insert into "cv_files" ("file_path", "is_active", "public_ur... ^ (Connection: pgsql, SQL: insert into "cv_files" ("file_path", "is_active", "public_url", "updated_at", "created_at") values (cv/vi6zmTr0bdCLQlznodjkaL458EdfESNLbK4cGAzO.pdf, 1, https://storage.googleapis.com/abiya-makruf_portofolio/cv/vi6zmTr0bdCLQlznodjkaL458EdfESNLbK4cGAzO.pdf, 2025-12-04 12:26:58, 2025-12-04 12:26:58) returning "id")
+
+- Button sidebar pada mode mobile Ketika diklik tidak menampilkan apa apa.
+
+
+pada halaman admin/project
+- Ketika di mode mobile table terpotong sehingga hanya menampilkan kolom Title, Category, dan Status. tolong perbaiki agar bisa di scroll ke samping.
+- Sesuaikan posisi dari button add project
+
+pada halaman admin/projects/create
+- terdapat error Ketika menambahkan project baru, errornya seperti berikut: SQLSTATE[42703]: Undefined column: 7 ERROR: column "website_url" of relation "projects" does not exist LINE 1: ...ription", "category", "tech_stack", "github_url", "website_u... ^ (Connection: pgsql, SQL: insert into "projects" ("title", "short_description", "full_description", "category", "tech_stack", "github_url", "website_url", "thumbnail", "status", "slug", "thumbnail_path", "updated_at", "created_at") values (Abiya, Abi, Abi, AI, ["Abi"], ?, ?, C:\Users\abiyamf\AppData\Local\Temp\php65D9.tmp, published, abiya, https://storage.googleapis.com/abiya-makruf_portofolio/projects/thumbnails/3WEgfEcSFL1C5EzevcKIVZtJW6x7zmRB7YDapLkH.jpg, 2025-12-04 12:29:43, 2025-12-04 12:29:43) returning "id")
+
+
+pada halaman admin/projects/{id}/edit
+- terdapat error Ketika melakukan update project yaitu: SQLSTATE[42703]: Undefined column: 7 ERROR: column "website_url" of relation "projects" does not exist LINE 1: update "projects" set "title" = $1, "slug" = $2, "website_ur... ^ (Connection: pgsql, SQL: update "projects" set "title" = Solar Panel, "slug" = solar-panel, "website_url" = ?, "updated_at" = 2025-12-04 12:30:53 where "id" = 4)
+
+pada halaman admin/skilss
+- table pada mode mobile terpotong, hanya terdapat kolom name, category, dan level saja. tolong perbaiki agar bisa di scroll ke samping.
+- sesuaikan posisi button add skill pada mode mobile
+- terdapat sebuah bug, Ketika saya melakukan setting jumlah show menjadi 15 kemudian saya mendelete sebuah data, maka show Kembali menjadi 10, seharusnya tetap menjadi 15.
+
+pada halaman admin/experiences
+- table pada mode mobile terpotong, hanya terdapat kolom company dan role saja. tolong perbaiki agar bisa di scroll ke samping.
+- sesuaikan posisi button add experience pada mode mobile.
+
+
+pada halaman admin/experience/{nama experience}/edit
+- setelah user menakan tombol "update experience" tampilkan popup atau apapun yang cocok untuk memberitahu bahwa update data berhasil. saat ini setelah menekan tombol update experience di rederict ke halaman admin/experiences seharusnya tetap berapada di halaman edit.
+
+pada halaman career/ pastikan category yang muncul pada section experience selalu dari professional, academic, program, baru organizational. Namun didalam category baru diurutkan berdasarkan tanggal start sama end.
+
+pada halaman admin/educations
+- table pada mobile terpotong. tolong perbaiki agar bisa di scroll ke samping.
+- tolong sesuaikan posisi button add education.
+
+pada halaman admin/educations/{id}/edit
+- terdapat error Ketika melakukan update education: SQLSTATE[42703]: Undefined column: 7 ERROR: column "thumbnail" of relation "educations" does not exist LINE 1: update "educations" set "thumbnail_path" = $1, "thumbnail" =... ^ (Connection: pgsql, SQL: update "educations" set "thumbnail_path" = https://storage.googleapis.com/abiya-makruf_portofolio/educations/thumbnails/InvAnOE3C2D3gS88nJslJoVqwMeBNzUW622OEva5.png, "thumbnail" = C:\Users\abiyamf\AppData\Local\Temp\php5564.tmp, "updated_at" = 2025-12-04 12:41:40 where "id" = 2)
+
+pada halaman admin/education/create
+- terdapat error Ketika melakukan add education: SQLSTATE[42703]: Undefined column: 7 ERROR: column "thumbnail" of relation "educations" does not exist LINE 1: ..."major", "start_date", "end_date", "description", "thumbnail... ^ (Connection: pgsql, SQL: insert into "educations" ("institution", "degree", "major", "start_date", "end_date", "description", "thumbnail", "thumbnail_path", "updated_at", "created_at") values (Telkom University, Bachelor of Informatics, Informatics, 2025-12-04 00:00:00, 2025-12-06 00:00:00, Ssss, C:\Users\abiyamf\AppData\Local\Temp\php325A.tmp, https://storage.googleapis.com/abiya-makruf_portofolio/educations/thumbnails/tLiT5XbaZM3gJhRORO4CA1iMSng1HL75yfisNHSK.png, 2025-12-04 12:42:36, 2025-12-04 12:42:36) returning "id")
+
+pada halaman admin/activities/create
+- terdapat error Ketika membuat activity baru: SQLSTATE[42703]: Undefined column: 7 ERROR: column "thumbnail_path" of relation "activities" does not exist LINE 1: ...ies" ("title", "content", "tags", "published_at", "thumbnail... ^ (Connection: pgsql, SQL: insert into "activities" ("title", "content", "tags", "published_at", "thumbnail_path", "gallery", "updated_at", "created_at") values (Juara Hackaton, Yeayyyy, ["Yeay"], 2025-11-04 19:43:00, ?, [], 2025-12-04 12:43:39, 2025-12-04 12:43:39) returning "id")
+
+pada halaman admin/achievements/create
+- terdapat error Ketika melakukan create new achievement: Array to string conversion (Connection: pgsql, SQL: insert into "achievements" ("title", "description", "date", "certificate_url", "gallery_images", "image_path", "gallery", "updated_at", "created_at") values (Test, ?, 2025-12-16 00:00:00, ?, ?, ?, ["https:\/\/storage.googleapis.com\/abiya-makruf_portofolio\/achievements\/gallery\/Pv5lYPIDQ6KGEbQn6yE0BQskNBDhLuKw2XuAaFzw.png","https:\/\/storage.googleapis.com\/abiya-makruf_portofolio\/achievements\/gallery\/YWPsKlwKB2YctKgnlfhEkisZOyyc7y9glfYORoxM.png","https:\/\/storage.googleapis.com\/abiya-makruf_portofolio\/achievements\/gallery\/K6iilProIyYatGVQYge4GC7jpNb0GKNbfOr4ZDCe.png"], 2025-12-04 12:45:30, 2025-12-04 12:45:30) returning "id")
+- modifikasi field Certificate URL sehingga pengguna bukan memasukkan link certificate namun melakukan upload sama seperti Hero image. Namun pada bagian tampilan sisi role pengguna yang tampil adalah teks hyperlink ke certificate nya.
+
+pada halaman admin
+- Ketika menekan tombol "publications" yang terdapat pada side bar terdapat error: SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "publications" does not exist LINE 1: select count(*) as aggregate from "publications" ^ (Connection: pgsql, SQL: select count(*) as aggregate from "publications")
+
+pada halaman admin/settings
+- modifikasi sehingga profile photo bukan menggunakan URL namun user melakukan upload, hasil upload disimpan di GCS dan public link disimpan di database, kemudian tampilkan di halaman Utama website. sesuaikan saja logikanya.

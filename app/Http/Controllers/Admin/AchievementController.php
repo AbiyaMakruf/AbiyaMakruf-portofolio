@@ -24,11 +24,18 @@ class AchievementController extends Controller
     {
         $data = $this->validateData($request);
 
-        [$image, $gallery] = $this->uploadImages($request);
-        $data['image_path'] = $image;
-        $data['gallery'] = $gallery;
+        [$image, $gallery, $certificateUrl] = $this->uploadImages($request);
 
-        Achievement::create($data);
+        $payload = [
+            'title' => $data['title'],
+            'description' => $data['description'] ?? null,
+            'date' => $data['date'] ?? null,
+            'certificate_url' => $certificateUrl ?? null,
+            'image_path' => $image,
+            'gallery' => $gallery,
+        ];
+
+        Achievement::create($payload);
 
         return redirect()->route('admin.achievements.index')->with('success', 'Achievement created.');
     }
@@ -44,7 +51,7 @@ class AchievementController extends Controller
         $achievement = Achievement::findOrFail($id);
         $data = $this->validateData($request);
 
-        [$image, $gallery] = $this->uploadImages($request);
+        [$image, $gallery, $certificateUrl] = $this->uploadImages($request);
         if ($image) {
             $data['image_path'] = $image;
         }
@@ -52,8 +59,18 @@ class AchievementController extends Controller
             $existing = $achievement->gallery ?? [];
             $data['gallery'] = array_values(array_filter(array_merge($existing, $gallery)));
         }
+        if ($certificateUrl) {
+            $data['certificate_url'] = $certificateUrl;
+        }
 
-        $achievement->update($data);
+        $achievement->update([
+            'title' => $data['title'],
+            'description' => $data['description'] ?? null,
+            'date' => $data['date'] ?? null,
+            'certificate_url' => $data['certificate_url'] ?? $achievement->certificate_url,
+            'image_path' => $data['image_path'] ?? $achievement->image_path,
+            'gallery' => $data['gallery'] ?? $achievement->gallery,
+        ]);
 
         return redirect()->route('admin.achievements.index')->with('success', 'Achievement updated.');
     }
@@ -72,7 +89,7 @@ class AchievementController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'date' => 'nullable|date',
-            'certificate_url' => 'nullable|url|max:500',
+            'certificate' => 'nullable|file|mimes:pdf,png,jpg,jpeg,webp|max:5120',
             'image' => 'nullable|image|max:4096',
             'gallery_images' => 'nullable|array',
             'gallery_images.*' => 'nullable|image|max:4096',
@@ -83,6 +100,12 @@ class AchievementController extends Controller
     {
         $imagePath = null;
         $gallery = [];
+        $certificateUrl = null;
+
+        if ($request->hasFile('certificate')) {
+            $path = $request->file('certificate')->store('achievements/certificates', 'gcs');
+            $certificateUrl = Storage::disk('gcs')->url($path);
+        }
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('achievements', 'gcs');
@@ -97,6 +120,6 @@ class AchievementController extends Controller
             }
         }
 
-        return [$imagePath, $gallery];
+        return [$imagePath, $gallery, $certificateUrl];
     }
 }

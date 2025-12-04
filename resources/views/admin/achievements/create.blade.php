@@ -23,9 +23,10 @@
                         @error('date') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Certificate URL (optional)</label>
-                        <input type="url" name="certificate_url" value="{{ old('certificate_url') }}" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
-                        @error('certificate_url') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                        <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Certificate (optional)</label>
+                        <input type="file" name="certificate" accept="image/*,.pdf" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+                        <p class="text-xs text-slate-500 mt-1">Upload a certificate file; a public link will be generated automatically.</p>
+                        @error('certificate') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
                         <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Hero Image (optional)</label>

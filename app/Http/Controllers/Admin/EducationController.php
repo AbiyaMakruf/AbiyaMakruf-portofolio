@@ -23,6 +23,7 @@ class EducationController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData($request);
+        unset($data['thumbnail']);
         $data['thumbnail_path'] = $this->uploadThumbnail($request);
 
         Education::create($data);
@@ -38,6 +39,7 @@ class EducationController extends Controller
     public function update(Request $request, Education $education)
     {
         $data = $this->validateData($request);
+        unset($data['thumbnail']);
 
         if ($thumb = $this->uploadThumbnail($request)) {
             $data['thumbnail_path'] = $thumb;

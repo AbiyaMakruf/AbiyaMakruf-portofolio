@@ -69,7 +69,7 @@
                 <h2 class="text-xl font-bold text-slate-900 mb-1">General Settings</h2>
                 <p class="text-sm text-slate-500 mb-4">Homepage tagline and contact details.</p>
 
-                <form action="{{ route('admin.settings.store') }}" method="POST" class="space-y-4">
+                <form action="{{ route('admin.settings.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-sm font-semibold text-slate-700">Website Tagline</label>
@@ -100,8 +100,15 @@
                                 <textarea name="about_description" rows="3" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm">{{ $settings['about_description'] ?? '' }}</textarea>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700">Profile Photo URL</label>
-                                <input type="text" name="about_photo_url" value="{{ $settings['about_photo_url'] ?? '' }}" placeholder="https://..." class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                                <label class="block text-sm text-slate-700">Profile Photo</label>
+                                @if(!empty($settings['about_photo_url']))
+                                    <div class="mb-2 flex items-center gap-3">
+                                        <img src="{{ $settings['about_photo_url'] }}" alt="Current profile" class="h-12 w-12 rounded-lg object-cover border border-slate-200">
+                                        <a href="{{ $settings['about_photo_url'] }}" target="_blank" class="text-[#00B3DB] text-sm hover:underline">View current photo</a>
+                                    </div>
+                                @endif
+                                <input type="file" name="about_photo" accept="image/*" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                                <p class="text-xs text-slate-500 mt-1">Upload to replace; the public link is stored automatically.</p>
                             </div>
                             <div>
                                 <label class="block text-sm text-slate-700">Location / Domisili</label>

@@ -1,13 +1,14 @@
 <x-layouts.app title="Manage Career">
     <div class="p-6">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
             <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Career / Experience</h1>
-            <a href="{{ route('admin.experiences.create') }}" class="rounded-lg bg-[#125C78] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">
+            <a href="{{ route('admin.experiences.create') }}" class="w-full sm:w-auto text-center rounded-lg bg-[#125C78] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">
                 + Add Experience
             </a>
         </div>
 
         <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
+            <div class="overflow-x-auto">
             <table class="w-full text-left text-sm text-slate-600 dark:text-slate-400">
                 <thead class="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-700 dark:text-slate-300">
                     <tr>
@@ -48,6 +49,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
         <div class="mt-4">
             {{ $experiences->links() }}

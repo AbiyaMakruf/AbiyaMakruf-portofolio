@@ -91,11 +91,13 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $skill = Skill::findOrFail($id);
         $skill->delete();
 
-        return redirect()->route('admin.skills.index')->with('success', 'Skill deleted.');
+        $query = array_filter($request->only(['sort', 'dir', 'per_page', 'page']));
+
+        return redirect()->route('admin.skills.index', $query)->with('success', 'Skill deleted.');
     }
 }

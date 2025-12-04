@@ -8,6 +8,12 @@
             <a href="{{ route('admin.experiences.index') }}" class="text-sm text-[#125C78] hover:underline">Back</a>
         </div>
 
+        @if(session('success'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2800)" x-show="show" class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 shadow-sm">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
             <form action="{{ route('admin.experiences.update', $experience) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
