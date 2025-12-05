@@ -12,9 +12,69 @@
             </div>
         @endif
 
-        <div class="grid gap-6 lg:grid-cols-3">
-            <!-- Social Links -->
-            <div class="lg:col-span-2 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+        <div class="space-y-6">
+            <!-- General Settings FIRST -->
+            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-1">General Settings</h2>
+                <p class="text-sm text-slate-500 mb-4">Homepage tagline and contact details.</p>
+
+                <form action="{{ route('admin.settings.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Website Tagline</label>
+                        <input type="text" name="tagline" value="{{ $settings['tagline'] ?? '' }}" placeholder="e.g., Full Stack Developer & AI Enthusiast" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        <p class="text-xs text-slate-500">Shown on the hero section.</p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Contact Email (Personal)</label>
+                            <input type="email" name="contact_email" value="{{ $settings['contact_email'] ?? '' }}" placeholder="personal@example.com" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Contact Email (University)</label>
+                            <input type="email" name="contact_email_university" value="{{ $settings['contact_email_university'] ?? '' }}" placeholder="student@university.ac.id" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Phone Number</label>
+                            <input type="text" name="contact_phone" value="{{ $settings['contact_phone'] ?? '' }}" placeholder="+62 xxx" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Location / Domisili</label>
+                            <input type="text" name="contact_location" value="{{ $settings['contact_location'] ?? '' }}" placeholder="Bandung, Indonesia" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-700">About Me</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm text-slate-700">Name</label>
+                                <input type="text" name="about_name" value="{{ $settings['about_name'] ?? '' }}" placeholder="Your name" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700">Headline / Short Description</label>
+                                <textarea name="about_description" rows="3" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm">{{ $settings['about_description'] ?? '' }}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700">Profile Photo</label>
+                                @if(!empty($settings['about_photo_url']))
+                                    <div class="mb-2 flex flex-col sm:flex-row sm:items-center gap-3">
+                                        <img src="{{ $settings['about_photo_url'] }}" alt="Current profile" class="h-12 w-12 rounded-lg object-cover border border-slate-200">
+                                        <a href="{{ $settings['about_photo_url'] }}" target="_blank" class="text-[#00B3DB] text-sm hover:underline break-all">{{ $settings['about_photo_url'] }}</a>
+                                    </div>
+                                @endif
+                                <input type="file" name="about_photo" accept="image/*" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                                <p class="text-xs text-slate-500 mt-1">Upload to replace; the public link is stored automatically.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">Save</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Social Links SECOND -->
+            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                 <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-4">
                     <div>
                         <h2 class="text-xl font-bold text-slate-900">Social Links</h2>
@@ -74,66 +134,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-
-            <!-- General Settings -->
-            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                <h2 class="text-xl font-bold text-slate-900 mb-1">General Settings</h2>
-                <p class="text-sm text-slate-500 mb-4">Homepage tagline and contact details.</p>
-
-                <form action="{{ route('admin.settings.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-                    @csrf
-                    <div class="space-y-2">
-                        <label class="block text-sm font-semibold text-slate-700">Website Tagline</label>
-                        <input type="text" name="tagline" value="{{ $settings['tagline'] ?? '' }}" placeholder="e.g., Full Stack Developer & AI Enthusiast" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        <p class="text-xs text-slate-500">Shown on the hero section.</p>
-                    </div>
-                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700">Contact Email (Personal)</label>
-                            <input type="email" name="contact_email" value="{{ $settings['contact_email'] ?? '' }}" placeholder="personal@example.com" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700">Contact Email (University)</label>
-                            <input type="email" name="contact_email_university" value="{{ $settings['contact_email_university'] ?? '' }}" placeholder="student@university.ac.id" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700">Phone Number</label>
-                            <input type="text" name="contact_phone" value="{{ $settings['contact_phone'] ?? '' }}" placeholder="+62 xxx" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700">Location / Domisili</label>
-                            <input type="text" name="contact_location" value="{{ $settings['contact_location'] ?? '' }}" placeholder="Bandung, Indonesia" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        </div>
-                    </div>
-                    <div class="border-t border-slate-100 pt-4 space-y-3">
-                        <h3 class="text-sm font-semibold text-slate-700">About Me</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-sm text-slate-700">Name</label>
-                                <input type="text" name="about_name" value="{{ $settings['about_name'] ?? '' }}" placeholder="Your name" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700">Headline / Short Description</label>
-                                <textarea name="about_description" rows="3" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm">{{ $settings['about_description'] ?? '' }}</textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700">Profile Photo</label>
-                                @if(!empty($settings['about_photo_url']))
-                                    <div class="mb-2 flex flex-col sm:flex-row sm:items-center gap-3">
-                                        <img src="{{ $settings['about_photo_url'] }}" alt="Current profile" class="h-12 w-12 rounded-lg object-cover border border-slate-200">
-                                        <a href="{{ $settings['about_photo_url'] }}" target="_blank" class="text-[#00B3DB] text-sm hover:underline break-all">{{ $settings['about_photo_url'] }}</a>
-                                    </div>
-                                @endif
-                                <input type="file" name="about_photo" accept="image/*" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                                <p class="text-xs text-slate-500 mt-1">Upload to replace; the public link is stored automatically.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">Save</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

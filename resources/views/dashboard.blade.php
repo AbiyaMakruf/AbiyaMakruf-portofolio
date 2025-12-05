@@ -35,18 +35,6 @@
                 <p class="text-sm text-slate-500">Manage technical skills</p>
             </a>
 
-            <!-- Achievements Card -->
-            <a href="{{ route('admin.achievements.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-yellow-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-yellow-100 p-3 text-yellow-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Achievement::count() }}</span>
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Achievements</h3>
-                <p class="text-sm text-slate-500">Manage certifications & awards</p>
-            </a>
-
             <!-- Activities Card -->
             <a href="{{ route('admin.activities.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-blue-500 dark:border-neutral-700 dark:bg-neutral-800">
                 <div class="flex items-center justify-between mb-4">
@@ -69,6 +57,42 @@
                 </div>
                 <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Career</h3>
                 <p class="text-sm text-slate-500">Manage work experience</p>
+            </a>
+
+            <!-- Education Card -->
+            <a href="{{ route('admin.educations.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-indigo-500 dark:border-neutral-700 dark:bg-neutral-800">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="rounded-lg bg-indigo-100 p-3 text-indigo-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6-3.33V14.5a6 6 0 01-6 6 6 6 0 01-6-6V10.67L12 14z" /></svg>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Education::count() }}</span>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Education</h3>
+                <p class="text-sm text-slate-500">Manage education entries</p>
+            </a>
+
+            <!-- Achievements Card -->
+            <a href="{{ route('admin.achievements.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-yellow-500 dark:border-neutral-700 dark:bg-neutral-800">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="rounded-lg bg-yellow-100 p-3 text-yellow-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Achievement::count() }}</span>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Achievements</h3>
+                <p class="text-sm text-slate-500">Manage certifications & awards</p>
+            </a>
+
+            <!-- Publications Card -->
+            <a href="{{ route('admin.publications.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-orange-500 dark:border-neutral-700 dark:bg-neutral-800">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="rounded-lg bg-orange-100 p-3 text-orange-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z" /></svg>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Publication::count() }}</span>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Publications</h3>
+                <p class="text-sm text-slate-500">Manage publication entries</p>
             </a>
 
             <!-- CV / Resume Card -->
