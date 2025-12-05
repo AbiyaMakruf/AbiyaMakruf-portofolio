@@ -17,7 +17,7 @@
                 <div class="p-8">
                     <div class="mb-8 text-center">
                         <a href="{{ route('home') }}" class="text-3xl font-bold tracking-tight text-[#125C78]">
-                            AM.
+                            Abiya Makruf
                         </a>
                         <h2 class="mt-4 text-xl font-semibold text-slate-800">{{ __('Welcome Back') }}</h2>
                         <p class="mt-2 text-sm text-slate-600">{{ __('Please sign in to your account') }}</p>

@@ -17,8 +17,8 @@
                     </svg>
                 </button>
                 
-                <a href="{{ route('admin.dashboard') }}" class="text-xl font-bold tracking-tight text-[#125C78]">
-                    AM.
+                <a href="{{ route('admin.dashboard') }}" class="sr-only">
+                    Abiya Makruf
                 </a>
                 
                 <div class="w-10"></div> <!-- Spacer for centering -->
@@ -51,9 +51,9 @@
                     </svg>
                 </button>
 
-                <a href="{{ route('admin.dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse">
-                    <span class="text-xl font-bold tracking-tight text-[#125C78]">AM.</span>
-                </a>
+            <a href="{{ route('admin.dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse">
+                <span class="text-xl font-bold tracking-tight text-[#125C78]">Abiya Makruf</span>
+            </a>
 
                 <a href="{{ route('home') }}" target="_blank" class="mt-2 mb-4 inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#125C78] hover:border-[#00B3DB] hover:text-[#00B3DB]">
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -81,7 +81,6 @@
 
                 <!-- User Profile Section - Now visible on both mobile and desktop -->
                 <div class="border-t border-slate-200 pt-4">
-                    <!-- User Info -->
                     <div class="flex items-center gap-3 px-2 py-2 mb-2">
                         <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-[#125C78] text-white">
                             <span class="flex h-full w-full items-center justify-center text-sm font-semibold">
@@ -93,8 +92,6 @@
                             <span class="truncate text-xs text-slate-500">{{ auth()->user()->email }}</span>
                         </div>
                     </div>
-
-                    <!-- User Actions -->
                     <div class="space-y-1">
                         <a 
                             href="{{ route('admin.profile.edit') }}" 
@@ -106,7 +103,6 @@
                             </svg>
                             <span>{{ __('Profile Settings') }}</span>
                         </a>
-
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button 

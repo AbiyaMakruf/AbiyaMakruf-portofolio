@@ -1,11 +1,9 @@
 <x-layouts.app title="Profile, Socials & Settings">
     <div class="p-6 space-y-8">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-xs uppercase tracking-[0.2em] text-[#00B3DB]">Profile & Settings</p>
-                <h1 class="text-3xl font-bold text-[#125C78]">Profile, Socials & General Settings</h1>
-                <p class="text-sm text-slate-500">Manage your social links and site metadata in one place.</p>
-            </div>
+        <div class="flex flex-col gap-2">
+            <p class="text-xs uppercase tracking-[0.2em] text-[#00B3DB]">Profile & Settings</p>
+            <h1 class="text-3xl font-bold text-[#125C78] leading-tight">Profile, Socials & General Settings</h1>
+            <p class="text-sm text-slate-500">Manage your social links and site metadata in one place.</p>
         </div>
 
         @if(session('success'))
@@ -17,18 +15,18 @@
         <div class="grid gap-6 lg:grid-cols-3">
             <!-- Social Links -->
             <div class="lg:col-span-2 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                <div class="flex items-center justify-between mb-4">
+                <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-4">
                     <div>
                         <h2 class="text-xl font-bold text-slate-900">Social Links</h2>
                         <p class="text-sm text-slate-500">Links displayed on your site.</p>
                     </div>
-                    <form action="{{ route('admin.socials.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 md:flex-row md:items-center">
+                    <form action="{{ route('admin.socials.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-2 w-full md:w-auto md:flex-wrap md:flex-row md:items-center">
                         @csrf
-                        <input type="text" name="platform" placeholder="Platform" required class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
-                        <input type="url" name="url" placeholder="https://..." required class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
-                        <input type="text" name="icon_class" placeholder="Icon class (optional)" class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
-                        <input type="file" name="icon" accept="image/*" class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-auto" />
-                        <button type="submit" class="rounded-lg bg-[#00B3DB] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0A7396] w-full md:w-auto">Add</button>
+                        <input type="text" name="platform" placeholder="Platform" required class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-44" />
+                        <input type="url" name="url" placeholder="https://..." required class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-52" />
+                        <input type="text" name="icon_class" placeholder="Icon class (optional)" class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-48" />
+                        <input type="file" name="icon" accept="image/*" class="rounded-lg border border-slate-200 px-3 py-2 text-sm w-full md:w-48" />
+                        <button type="submit" class="rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396] w-full md:w-auto">Add</button>
                     </form>
                 </div>
 
@@ -48,7 +46,7 @@
                                     <tr class="hover:bg-slate-50/70">
                                         <td class="px-4 py-3 font-medium text-slate-900">{{ $social->platform }}</td>
                                         <td class="px-4 py-3 text-slate-600">
-                                            <a href="{{ $social->url }}" target="_blank" class="text-[#00B3DB] hover:text-[#0A7396]">{{ $social->url }}</a>
+                                            <a href="{{ $social->url }}" target="_blank" class="text-[#00B3DB] hover:text-[#0A7396] break-all">{{ $social->url }}</a>
                                         </td>
                                         <td class="px-4 py-3">
                                             @if($social->icon_path)
@@ -85,25 +83,31 @@
 
                 <form action="{{ route('admin.settings.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                     @csrf
-                    <div>
+                    <div class="space-y-2">
                         <label class="block text-sm font-semibold text-slate-700">Website Tagline</label>
-                        <input type="text" name="tagline" value="{{ $settings['tagline'] ?? '' }}" placeholder="e.g., Full Stack Developer & AI Enthusiast" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                        <p class="text-xs text-slate-500 mt-1">Shown on the hero section.</p>
+                        <input type="text" name="tagline" value="{{ $settings['tagline'] ?? '' }}" placeholder="e.g., Full Stack Developer & AI Enthusiast" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        <p class="text-xs text-slate-500">Shown on the hero section.</p>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700">Contact Email (Personal)</label>
-                        <input type="email" name="contact_email" value="{{ $settings['contact_email'] ?? '' }}" placeholder="personal@example.com" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Contact Email (Personal)</label>
+                            <input type="email" name="contact_email" value="{{ $settings['contact_email'] ?? '' }}" placeholder="personal@example.com" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Contact Email (University)</label>
+                            <input type="email" name="contact_email_university" value="{{ $settings['contact_email_university'] ?? '' }}" placeholder="student@university.ac.id" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Phone Number</label>
+                            <input type="text" name="contact_phone" value="{{ $settings['contact_phone'] ?? '' }}" placeholder="+62 xxx" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">Location / Domisili</label>
+                            <input type="text" name="contact_location" value="{{ $settings['contact_location'] ?? '' }}" placeholder="Bandung, Indonesia" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700">Contact Email (University)</label>
-                        <input type="email" name="contact_email_university" value="{{ $settings['contact_email_university'] ?? '' }}" placeholder="student@university.ac.id" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700">Phone Number</label>
-                        <input type="text" name="contact_phone" value="{{ $settings['contact_phone'] ?? '' }}" placeholder="+62 xxx" class="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
-                    </div>
-                    <div class="border-t border-slate-100 pt-4">
-                        <h3 class="text-sm font-semibold text-slate-700 mb-2">About Me</h3>
+                    <div class="border-t border-slate-100 pt-4 space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-700">About Me</h3>
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-sm text-slate-700">Name</label>
@@ -116,17 +120,13 @@
                             <div>
                                 <label class="block text-sm text-slate-700">Profile Photo</label>
                                 @if(!empty($settings['about_photo_url']))
-                                    <div class="mb-2 flex items-center gap-3">
+                                    <div class="mb-2 flex flex-col sm:flex-row sm:items-center gap-3">
                                         <img src="{{ $settings['about_photo_url'] }}" alt="Current profile" class="h-12 w-12 rounded-lg object-cover border border-slate-200">
-                                        <a href="{{ $settings['about_photo_url'] }}" target="_blank" class="text-[#00B3DB] text-sm hover:underline">View current photo</a>
+                                        <a href="{{ $settings['about_photo_url'] }}" target="_blank" class="text-[#00B3DB] text-sm hover:underline break-all">{{ $settings['about_photo_url'] }}</a>
                                     </div>
                                 @endif
                                 <input type="file" name="about_photo" accept="image/*" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
                                 <p class="text-xs text-slate-500 mt-1">Upload to replace; the public link is stored automatically.</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700">Location / Domisili</label>
-                                <input type="text" name="contact_location" value="{{ $settings['contact_location'] ?? '' }}" placeholder="Bandung, Indonesia" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
                             </div>
                         </div>
                     </div>

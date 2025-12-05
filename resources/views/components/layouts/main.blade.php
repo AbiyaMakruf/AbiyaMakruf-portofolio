@@ -17,7 +17,7 @@
     <nav class="fixed top-0 z-50 w-full border-b border-white/10 bg-white/70 backdrop-blur-md transition-all">
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <a href="{{ route('home') }}" class="text-xl font-bold tracking-tight text-[#125C78]">
-                AM.
+                Abiya Makruf
             </a>
             <div class="hidden md:flex gap-6">
                 <a href="{{ route('projects.index') }}" class="text-sm font-medium text-slate-600 hover:text-[#00B3DB] transition">Projects</a>
@@ -32,7 +32,7 @@
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="hidden md:inline-block text-sm font-medium text-slate-600 hover:text-[#00B3DB]">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-medium text-slate-600 hover:text-[#00B3DB]">Login</a>
+                    <a href="{{ route('login') }}" class="hidden md:inline-block text-sm font-medium text-slate-600 hover:text-[#00B3DB]">Login</a>
                 @endauth
             </div>
             <div class="flex items-center gap-2 md:hidden">

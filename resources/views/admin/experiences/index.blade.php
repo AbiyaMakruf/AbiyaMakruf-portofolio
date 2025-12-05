@@ -2,7 +2,7 @@
     <div class="p-6">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
             <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Career / Experience</h1>
-            <a href="{{ route('admin.experiences.create') }}" class="w-full sm:w-auto text-center rounded-lg bg-[#125C78] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">
+            <a href="{{ route('admin.experiences.create') }}" class="w-full sm:w-auto text-center rounded-lg bg-[#00B3DB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">
                 + Add Experience
             </a>
         </div>
