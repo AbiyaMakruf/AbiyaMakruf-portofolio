@@ -11,7 +11,7 @@ class PublicationController extends Controller
 {
     public function index()
     {
-        $publications = Publication::orderByDesc('published_at')->paginate(10);
+        $publications = Publication::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.publications.index', compact('publications'));
     }
 
@@ -46,10 +46,14 @@ class PublicationController extends Controller
         if ($certificate) {
             $data['certificate_image_path'] = $certificate;
         }
-        if ($gallery) {
-            $existing = $publication->gallery ?? [];
-            $data['gallery'] = array_values(array_filter(array_merge($existing, $gallery)));
+        $existing = $publication->gallery ?? [];
+        if ($request->has('delete_gallery')) {
+            $existing = array_values(array_diff($existing, (array) $request->delete_gallery));
         }
+        if ($gallery) {
+            $existing = array_values(array_filter(array_merge($existing, $gallery)));
+        }
+        $data['gallery'] = $existing ?: null;
 
         $publication->update($data);
 

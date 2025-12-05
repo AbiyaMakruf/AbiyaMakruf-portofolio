@@ -11,7 +11,7 @@ class EducationController extends Controller
 {
     public function index()
     {
-        $educations = Education::orderByDesc('start_date')->paginate(10);
+        $educations = Education::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.educations.index', compact('educations'));
     }
 

@@ -52,17 +52,19 @@
                     @error('description') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="space-y-3">
-                    <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Gallery Images</label>
-                    @if($achievement->gallery)
-                        <div class="grid grid-cols-2 gap-3">
-                            @foreach($achievement->gallery as $image)
-                                <div class="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
-                                    <img src="{{ $image }}" alt="Gallery image" class="h-28 w-full object-cover">
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
+                    <div class="space-y-3">
+                        <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Gallery Images</label>
+                        @if($achievement->gallery)
+                            <div class="grid grid-cols-2 gap-3">
+                                @foreach($achievement->gallery as $image)
+                                    <label class="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 relative block">
+                                        <img src="{{ $image }}" alt="Gallery image" class="h-28 w-full object-cover">
+                                        <input type="checkbox" name="delete_gallery[]" value="{{ $image }}" class="absolute top-2 left-2 h-4 w-4">
+                                        <span class="absolute top-2 left-8 text-xs bg-white/80 px-2 py-0.5 rounded">Remove</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        @endif
                     <input type="file" name="gallery_images[]" multiple accept="image/*" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
                     @error('gallery_images.*') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>

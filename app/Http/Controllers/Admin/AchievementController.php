@@ -11,7 +11,7 @@ class AchievementController extends Controller
 {
     public function index()
     {
-        $achievements = Achievement::latest()->paginate(10);
+        $achievements = Achievement::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.achievements.index', compact('achievements'));
     }
 
@@ -55,9 +55,17 @@ class AchievementController extends Controller
         if ($image) {
             $data['image_path'] = $image;
         }
+        $existing = $achievement->gallery ?? [];
+        if ($request->has('delete_gallery')) {
+            $existing = array_values(array_diff($existing, (array) $request->delete_gallery));
+        }
         if ($gallery) {
-            $existing = $achievement->gallery ?? [];
-            $data['gallery'] = array_values(array_filter(array_merge($existing, $gallery)));
+            $existing = array_values(array_filter(array_merge($existing, $gallery)));
+        }
+        if ($existing) {
+            $data['gallery'] = $existing;
+        } else {
+            $data['gallery'] = null;
         }
         if ($certificateUrl) {
             $data['certificate_url'] = $certificateUrl;

@@ -13,7 +13,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::latest()->paginate(10);
+        $projects = Project::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -125,8 +125,9 @@ class ProjectController extends Controller
 
         // Delete selected gallery images
         if ($request->has('delete_gallery')) {
-            $project->images()->whereIn('id', $request->delete_gallery)->delete();
-            // Ideally delete from storage too, but skipping for brevity
+            $ids = (array) $request->delete_gallery;
+            $project->images()->whereIn('id', $ids)->delete();
+            // Optionally delete files from storage if needed
         }
 
         // Handle New Gallery Images

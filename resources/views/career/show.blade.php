@@ -41,9 +41,6 @@
                                 @endif
                             </p>
                         </div>
-                        <div class="rounded-xl bg-slate-50 px-4 py-2 text-sm text-slate-600 border border-slate-100">
-                            <span class="font-semibold text-[#0A7396]">Slug:</span> {{ $experience->slug }}
-                        </div>
                     </div>
 
                     @if($experience->description)
@@ -53,7 +50,7 @@
                     @if($experience->highlights)
                         <div class="rounded-xl border border-slate-100 bg-slate-50/50 p-5">
                             <h3 class="mb-3 text-lg font-semibold text-[#0A7396]">Highlights</h3>
-                            <ul class="grid gap-2 sm:grid-cols-2 text-slate-700">
+                            <ul class="grid gap-2 text-slate-700">
                                 @foreach($experience->highlights as $item)
                                     <li class="flex items-start gap-2">
                                         <span class="mt-1 h-2 w-2 rounded-full bg-[#15B489]"></span>

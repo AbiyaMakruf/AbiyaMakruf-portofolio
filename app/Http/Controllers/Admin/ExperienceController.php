@@ -16,7 +16,7 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $experiences = Experience::orderBy('start_date', 'desc')->paginate(10);
+        $experiences = Experience::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.experiences.index', compact('experiences'));
     }
 
@@ -72,8 +72,11 @@ class ExperienceController extends Controller
         }
 
         $existingGallery = $experience->gallery ?? [];
+        if ($request->has('delete_gallery')) {
+            $existingGallery = array_values(array_diff($existingGallery, (array) $request->delete_gallery));
+        }
         $newGallery = $this->handleGalleryUploads($request);
-        $data['gallery'] = array_values(array_filter(array_merge($existingGallery, $newGallery)));
+        $data['gallery'] = array_values(array_filter(array_merge($existingGallery, $newGallery))) ?: null;
 
         $experience->update($data);
 

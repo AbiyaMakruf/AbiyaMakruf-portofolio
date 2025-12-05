@@ -14,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities = Activity::latest()->paginate(10);
+        $activities = Activity::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.activities.index', compact('activities'));
     }
 
@@ -72,10 +72,18 @@ class ActivityController extends Controller
         if ($thumb) {
             $data['thumbnail_path'] = $thumb;
         }
-        if ($gallery) {
-            $existing = $activity->gallery ?? [];
-            $data['gallery'] = array_values(array_filter(array_merge($existing, $gallery)));
+        $existing = $activity->gallery ?? [];
+
+        if ($request->has('delete_gallery')) {
+            $toDelete = (array) $request->delete_gallery;
+            $existing = array_values(array_diff($existing, $toDelete));
         }
+
+        if ($gallery) {
+            $existing = array_values(array_filter(array_merge($existing, $gallery)));
+        }
+
+        $data['gallery'] = $existing ?: null;
 
         $activity->update($data);
 

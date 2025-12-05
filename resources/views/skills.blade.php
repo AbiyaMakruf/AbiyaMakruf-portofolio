@@ -28,16 +28,16 @@
             </div>
 
             <!-- Achievements -->
-            <div class="space-y-4">
+            <div class="space-y-4" x-data="{ open: null }">
                 <div class="flex items-center gap-2">
                     <span class="h-2 w-2 rounded-full bg-[#15B489]"></span>
                     <h2 class="text-2xl font-bold text-[#125C78]">Achievements</h2>
                 </div>
                 <div class="grid gap-6 md:grid-cols-2">
                     @forelse($achievements as $achievement)
-                        <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
+                        <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden cursor-pointer" @click="open === {{ $achievement->id }} ? open = null : open = {{ $achievement->id }}">
                             @if($achievement->image_path)
-                                <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="h-40 w-full object-cover">
+                                <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="h-40 w-full object-contain bg-slate-50">
                             @endif
                             <div class="p-6 space-y-3">
                                 <div class="flex items-center gap-2 text-xs text-slate-500">
@@ -49,15 +49,36 @@
                                 </div>
                                 <h3 class="text-lg font-bold text-slate-800">{{ $achievement->title }}</h3>
                                 <p class="text-sm text-slate-600">{{ Str::limit($achievement->description, 180) }}</p>
-                                @if($achievement->gallery)
-                                    <div class="grid gap-2 sm:grid-cols-3">
-                                        @foreach(array_slice($achievement->gallery,0,3) as $image)
-                                            <img src="{{ $image }}" class="h-20 w-full rounded-lg object-cover border border-slate-100" alt="Gallery">
-                                        @endforeach
-                                    </div>
-                                @endif
+                                <span class="text-sm font-semibold text-[#00B3DB]">Read more →</span>
                             </div>
                         </article>
+                        <!-- Modal -->
+                        <div x-show="open === {{ $achievement->id }}" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" @click.self="open = null">
+                            <div class="max-w-3xl w-full overflow-hidden rounded-2xl bg-white shadow-2xl">
+                                <div class="flex justify-between items-center px-4 py-3 border-b border-slate-100">
+                                    <div>
+                                        <p class="text-xs text-slate-500">{{ $achievement->date?->format('d M Y') ?? 'No date' }}</p>
+                                        <h3 class="text-xl font-bold text-slate-800">{{ $achievement->title }}</h3>
+                                    </div>
+                                    <button class="text-slate-400 hover:text-slate-600" @click="open = null">✕</button>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    @if($achievement->image_path)
+                                        <div class="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+                                            <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="w-full object-contain max-h-72 mx-auto">
+                                        </div>
+                                    @endif
+                                    <p class="text-slate-700 leading-relaxed">{{ $achievement->description }}</p>
+                                    @if($achievement->gallery)
+                                        <div class="grid gap-3 sm:grid-cols-3">
+                                            @foreach($achievement->gallery as $image)
+                                                <img src="{{ $image }}" class="w-full rounded-lg border border-slate-100 object-contain bg-slate-50 max-h-40" alt="Gallery">
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     @empty
                         <p class="text-slate-500">No achievements yet.</p>
                     @endforelse
@@ -65,16 +86,16 @@
             </div>
 
             <!-- Publications -->
-            <div class="space-y-4">
+            <div class="space-y-4" x-data="{ openPub: null }">
                 <div class="flex items-center gap-2">
                     <span class="h-2 w-2 rounded-full bg-[#00B3DB]"></span>
                     <h2 class="text-2xl font-bold text-[#125C78]">Publications</h2>
                 </div>
                 <div class="grid gap-6 md:grid-cols-2">
                     @forelse($publications as $pub)
-                        <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
+                        <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden cursor-pointer" @click="openPub === {{ $pub->id }} ? openPub = null : openPub = {{ $pub->id }}">
                             @if($pub->certificate_image_path)
-                                <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="h-40 w-full object-cover">
+                                <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="h-40 w-full object-contain bg-slate-50">
                             @endif
                             <div class="p-6 space-y-3">
                                 <div class="flex items-center gap-2 text-xs text-slate-500">
@@ -86,15 +107,35 @@
                                 </div>
                                 <h3 class="text-lg font-bold text-slate-800">{{ $pub->title }}</h3>
                                 <p class="text-sm text-slate-600">{{ Str::limit($pub->description, 180) }}</p>
-                                @if($pub->gallery)
-                                    <div class="grid gap-2 sm:grid-cols-3">
-                                        @foreach(array_slice($pub->gallery,0,3) as $image)
-                                            <img src="{{ $image }}" class="h-20 w-full rounded-lg object-cover border border-slate-100" alt="Gallery">
-                                        @endforeach
-                                    </div>
-                                @endif
+                                <span class="text-sm font-semibold text-[#00B3DB]">Read more →</span>
                             </div>
                         </article>
+                        <div x-show="openPub === {{ $pub->id }}" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" @click.self="openPub = null">
+                            <div class="max-w-3xl w-full overflow-hidden rounded-2xl bg-white shadow-2xl">
+                                <div class="flex justify-between items-center px-4 py-3 border-b border-slate-100">
+                                    <div>
+                                        <p class="text-xs text-slate-500">{{ $pub->published_at?->format('d M Y') ?? 'No date' }}</p>
+                                        <h3 class="text-xl font-bold text-slate-800">{{ $pub->title }}</h3>
+                                    </div>
+                                    <button class="text-slate-400 hover:text-slate-600" @click="openPub = null">✕</button>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    @if($pub->certificate_image_path)
+                                        <div class="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+                                            <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="w-full object-contain max-h-72 mx-auto">
+                                        </div>
+                                    @endif
+                                    <p class="text-slate-700 leading-relaxed">{{ $pub->description }}</p>
+                                    @if($pub->gallery)
+                                        <div class="grid gap-3 sm:grid-cols-3">
+                                            @foreach($pub->gallery as $image)
+                                                <img src="{{ $image }}" class="w-full rounded-lg border border-slate-100 object-contain bg-slate-50 max-h-40" alt="Gallery">
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     @empty
                         <p class="text-slate-500">No publications yet.</p>
                     @endforelse

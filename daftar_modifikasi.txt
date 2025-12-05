@@ -1,0 +1,17 @@
+- Remove galery image pada Edit Achievement tidak berfungsi.
+- Remove galery image pada project error seperti berikut:
+Illuminate\Database\QueryException
+vendor\laravel\framework\src\Illuminate\Database\Connection.php:826
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "delete_gallery" of relation "projects" does not exist LINE 1: update "projects" set "delete_gallery" = $1, "existing_galle... ^ (Connection: pgsql, SQL: update "projects" set "delete_gallery" = ["1"], "existing_gallery" = {"1":{"caption":null}}, "updated_at" = 2025-12-05 10:46:26 where "id" = 1)
+
+- Pada halaman career, saya ingin teks yang muncul dari field highlight munculnya kebawah bukan ke samping, kalau dari inspect element maka element ini yang harus diesuaikan: 
+<ul class="mt-2 grid gap-2 sm:grid-cols-2 text-sm text-slate-600">
+                                                                                                                    <li class="flex items-start gap-2">
+                                                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#15B489]"></span>
+                                                                <span>Developed player detection/tracking with heatmaps and trajectories.</span>
+                                                            </li>
+                                                                                                                    <li class="flex items-start gap-2">
+                                                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#15B489]"></span>
+                                                                <span>Delivered retail sales analytics dashboards in Power BI.</span>
+                                                            </li>
+                                                                                                            </ul>

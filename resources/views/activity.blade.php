@@ -5,9 +5,19 @@
 
             <div class="space-y-8">
                 @forelse($activities as $activity)
-                    <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
+                    <article x-data="{
+                            open:false,
+                            current:0,
+                            images: @js($activity->gallery ?? []),
+                            show(idx){ this.current = idx; this.open = true; },
+                            next(){ if(!this.images.length) return; this.current = (this.current + 1) % this.images.length; },
+                            prev(){ if(!this.images.length) return; this.current = (this.current - 1 + this.images.length) % this.images.length; },
+                        }"
+                        class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
                         @if($activity->thumbnail_path)
-                            <img src="{{ $activity->thumbnail_path }}" alt="{{ $activity->title }}" class="h-48 w-full object-cover">
+                            <div class="bg-slate-50">
+                                <img src="{{ $activity->thumbnail_path }}" alt="{{ $activity->title }}" class="h-48 w-full object-contain">
+                            </div>
                         @endif
                         <div class="p-8">
                             <div class="mb-4 flex items-center gap-4 text-sm text-slate-500">
@@ -26,11 +36,27 @@
                             </div>
                             @if($activity->gallery)
                                 <div class="mt-6 grid gap-3 sm:grid-cols-2">
-                                    @foreach($activity->gallery as $image)
-                                        <div class="overflow-hidden rounded-xl border border-slate-100">
-                                            <img src="{{ $image }}" alt="Gallery image" class="h-36 w-full object-cover">
-                                        </div>
+                                    @foreach($activity->gallery as $idx => $image)
+                                        <button type="button" class="overflow-hidden rounded-xl border border-slate-100 bg-slate-50" @click="show({{ $idx }})">
+                                            <img src="{{ $image }}" alt="Gallery image" class="h-36 w-full object-contain">
+                                        </button>
                                     @endforeach
+                                </div>
+                                <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" @click.self="open=false">
+                                    <div class="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+                                        <button class="absolute top-3 right-3 text-white bg-black/60 rounded-full p-2" @click="open=false">✕</button>
+                                        <div class="bg-slate-50 flex items-center justify-center">
+                                            <template x-if="images.length">
+                                                <img :src="images[current]" class="max-h-[80vh] w-full object-contain">
+                                            </template>
+                                        </div>
+                                        <div class="absolute inset-y-0 left-0 flex items-center">
+                                            <button class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="prev()">‹</button>
+                                        </div>
+                                        <div class="absolute inset-y-0 right-0 flex items-center">
+                                            <button class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="next()">›</button>
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
                         </div>

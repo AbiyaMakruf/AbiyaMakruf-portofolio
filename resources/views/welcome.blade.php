@@ -35,9 +35,9 @@
                     @php
                         $aboutPhoto = \App\Models\SiteSetting::where('key','about_photo_url')->value('value');
                     @endphp
-                    <div class="relative h-52 w-52 overflow-hidden rounded-2xl border border-slate-100 shadow-lg">
+                    <div class="relative h-52 w-52 overflow-hidden rounded-2xl border border-slate-100 shadow-lg bg-white">
                         @if($aboutPhoto)
-                            <img src="{{ $aboutPhoto }}" alt="Profile photo" class="h-full w-full object-cover">
+                            <img src="{{ $aboutPhoto }}" alt="Profile photo" class="h-full w-full object-contain">
                         @else
                             <div class="flex h-full w-full items-center justify-center bg-slate-100 text-slate-400">No Photo</div>
                         @endif
