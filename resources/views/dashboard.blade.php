@@ -1,112 +1,238 @@
 <x-layouts.app title="Admin Dashboard">
-    <div class="flex h-full w-full flex-1 flex-col gap-8 rounded-xl p-6">
+    <div class="flex h-full w-full flex-1 flex-col gap-8 p-4 sm:p-6 lg:p-8">
         
-        <!-- Header -->
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
-                <p class="text-slate-500">Manage your portfolio content.</p>
+        <!-- Modern Header -->
+        <div class="space-y-2 animate-fadeInUp">
+            <div class="flex items-center gap-3">
+                <div class="h-1 w-12 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full"></div>
+                <span class="text-sm font-semibold text-primary-600 uppercase tracking-wider">Admin Panel</span>
             </div>
+            <h1 class="text-3xl lg:text-4xl font-bold text-zinc-900 dark:text-white">Dashboard Overview</h1>
+            <p class="text-zinc-600 dark:text-zinc-400">Manage and monitor your portfolio content</p>
         </div>
 
-        <!-- Stats / Quick Links Grid -->
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <!-- Stats Grid -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <!-- Projects Card -->
-            <a href="{{ route('admin.projects.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-[#00B3DB] dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-[#CEF9FF] p-3 text-[#0A7396]">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            <a href="{{ route('admin.projects.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.1s;">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        <svg class="w-5 h-5 text-zinc-400 group-hover:text-primary-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Project::count() }}</span>
+                    <div>
+                        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">Projects</p>
+                        <p class="text-3xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Project::count() }}</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Active
+                        </span>
+                        <span class="text-zinc-500 dark:text-zinc-500">· View all projects</span>
+                    </div>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Projects</h3>
-                <p class="text-sm text-slate-500">Manage portfolio projects</p>
             </a>
 
             <!-- Skills Card -->
-            <a href="{{ route('admin.skills.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-emerald-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-emerald-100 p-3 text-emerald-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            <a href="{{ route('admin.skills.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 shadow-lg flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <svg class="w-5 h-5 text-zinc-400 group-hover:text-accent-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Skill::count() }}</span>
+                    <div>
+                        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">Skills</p>
+                        <p class="text-3xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Skill::count() }}</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Active
+                        </span>
+                        <span class="text-zinc-500 dark:text-zinc-500">· Manage skills</span>
+                    </div>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Skills</h3>
-                <p class="text-sm text-slate-500">Manage technical skills</p>
             </a>
 
             <!-- Activities Card -->
-            <a href="{{ route('admin.activities.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-blue-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-blue-100 p-3 text-blue-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+            <a href="{{ route('admin.activities.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.3s;">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                        </div>
+                        <svg class="w-5 h-5 text-zinc-400 group-hover:text-blue-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Activity::count() }}</span>
+                    <div>
+                        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">Activities</p>
+                        <p class="text-3xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Activity::count() }}</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Active
+                        </span>
+                        <span class="text-zinc-500 dark:text-zinc-500">· Blog posts</span>
+                    </div>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Activities</h3>
-                <p class="text-sm text-slate-500">Manage posts & updates</p>
             </a>
 
             <!-- Career Card -->
-            <a href="{{ route('admin.experiences.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-purple-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-purple-100 p-3 text-purple-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            <a href="{{ route('admin.experiences.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.4s;">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <svg class="w-5 h-5 text-zinc-400 group-hover:text-purple-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Experience::count() }}</span>
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Career</h3>
-                <p class="text-sm text-slate-500">Manage work experience</p>
-            </a>
-
-            <!-- Education Card -->
-            <a href="{{ route('admin.educations.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-indigo-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-indigo-100 p-3 text-indigo-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6-3.33V14.5a6 6 0 01-6 6 6 6 0 01-6-6V10.67L12 14z" /></svg>
+                    <div>
+                        <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">Career</p>
+                        <p class="text-3xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Experience::count() }}</p>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Education::count() }}</span>
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Education</h3>
-                <p class="text-sm text-slate-500">Manage education entries</p>
-            </a>
-
-            <!-- Achievements Card -->
-            <a href="{{ route('admin.achievements.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-yellow-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-yellow-100 p-3 text-yellow-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Active
+                        </span>
+                        <span class="text-zinc-500 dark:text-zinc-500">· Experience</span>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Achievement::count() }}</span>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Achievements</h3>
-                <p class="text-sm text-slate-500">Manage certifications & awards</p>
-            </a>
-
-            <!-- Publications Card -->
-            <a href="{{ route('admin.publications.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-orange-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-orange-100 p-3 text-orange-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z" /></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Publication::count() }}</span>
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Publications</h3>
-                <p class="text-sm text-slate-500">Manage publication entries</p>
-            </a>
-
-            <!-- CV / Resume Card -->
-            <a href="{{ route('admin.cv.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-[#0A7396]">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-slate-100 p-3 text-[#0A7396]">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.657 1.343-3 3-3h4m0 0l-4-4m4 4l-4 4m-5 4H5a2 2 0 01-2-2V5a2 2 0 012-2h7m0 0v4a2 2 0 002 2h4m-6 6l-2 2m0 0l-2-2m2 2V9"></path></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900">{{ \App\Models\CvFile::count() }}</span>
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900">CV / Resume</h3>
-                <p class="text-sm text-slate-500">Upload latest CV to GCS</p>
             </a>
         </div>
 
+        <!-- Secondary Cards Grid -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Education Card -->
+            <a href="{{ route('admin.educations.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.5s;">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Education::count() }}</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-zinc-900 dark:text-white mb-1">Education</h3>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400">Academic background</p>
+                </div>
+            </a>
+
+            <!-- Achievements Card -->
+            <a href="{{ route('admin.achievements.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.6s;">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-900/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Achievement::count() }}</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-zinc-900 dark:text-white mb-1">Achievements</h3>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400">Certifications & awards</p>
+                </div>
+            </a>
+
+            <!-- Publications Card -->
+            <a href="{{ route('admin.publications.index') }}" 
+               class="group card-modern hover:shadow-lifted animate-fadeInUp" style="animation-delay: 0.7s;">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold text-zinc-900 dark:text-white">{{ \App\Models\Publication::count() }}</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-zinc-900 dark:text-white mb-1">Publications</h3>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400">Research papers</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card-modern animate-fadeInUp" style="animation-delay: 0.8s;">
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-zinc-900 dark:text-white mb-4">Quick Actions</h3>
+                <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    <a href="{{ route('admin.projects.create') }}" 
+                       class="group flex items-center gap-3 p-4 rounded-xl border-2 border-dashed border-zinc-200 dark:border-zinc-700 hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/10 transition-all duration-200">
+                        <div class="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-primary-600 dark:group-hover:text-primary-400">New Project</span>
+                    </a>
+                    <a href="{{ route('admin.activities.create') }}" 
+                       class="group flex items-center gap-3 p-4 rounded-xl border-2 border-dashed border-zinc-200 dark:border-zinc-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all duration-200">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">New Activity</span>
+                    </a>
+                    <a href="{{ route('admin.settings.index') }}" 
+                       class="group flex items-center gap-3 p-4 rounded-xl border-2 border-dashed border-zinc-200 dark:border-zinc-700 hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all duration-200">
+                        <div class="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white">Settings</span>
+                    </a>
+                    <a href="{{ route('home') }}" target="_blank"
+                       class="group flex items-center gap-3 p-4 rounded-xl border-2 border-dashed border-zinc-200 dark:border-zinc-700 hover:border-accent-500 hover:bg-accent-50 dark:hover:bg-accent-900/10 transition-all duration-200">
+                        <div class="w-10 h-10 rounded-lg bg-accent-100 dark:bg-accent-900/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-accent-600 dark:group-hover:text-accent-400">View Site</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </x-layouts.app>
