@@ -1,103 +1,108 @@
 <x-layouts.app title="Admin Dashboard">
-    <div class="flex h-full w-full flex-1 flex-col gap-8 rounded-xl p-6">
+    <div class="flex flex-col gap-8">
         
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
-                <p class="text-slate-500">Manage your portfolio content.</p>
+                <h1 class="text-3xl font-bold text-slate-900">Dashboard</h1>
+                <p class="text-slate-500 mt-1">Welcome back, {{ auth()->user()->name }}. Here's what's happening.</p>
+            </div>
+            <div class="flex gap-3">
+                <a href="{{ route('home') }}" target="_blank" class="inline-flex items-center gap-2 rounded-xl bg-white border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 hover:text-primary-600 transition-all">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    View Site
+                </a>
             </div>
         </div>
 
-        <!-- Stats / Quick Links Grid -->
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <!-- Projects Card -->
-            <a href="{{ route('admin.projects.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-[#00B3DB] dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-[#CEF9FF] p-3 text-[#0A7396]">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+        <!-- Stats Grid -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            @php
+                $stats = [
+                    ['label' => 'Projects', 'count' => \App\Models\Project::count(), 'route' => 'admin.projects.index', 'icon' => 'briefcase', 'color' => 'text-blue-600', 'bg' => 'bg-blue-50'],
+                    ['label' => 'Skills', 'count' => \App\Models\Skill::count(), 'route' => 'admin.skills.index', 'icon' => 'code-bracket', 'color' => 'text-emerald-600', 'bg' => 'bg-emerald-50'],
+                    ['label' => 'Experience', 'count' => \App\Models\Experience::count(), 'route' => 'admin.experiences.index', 'icon' => 'academic-cap', 'color' => 'text-purple-600', 'bg' => 'bg-purple-50'],
+                    ['label' => 'Activities', 'count' => \App\Models\Activity::count(), 'route' => 'admin.activities.index', 'icon' => 'pencil-square', 'color' => 'text-orange-600', 'bg' => 'bg-orange-50'],
+                ];
+            @endphp
+
+            @foreach($stats as $stat)
+                <a href="{{ route($stat['route']) }}" class="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm border border-slate-100 transition-all hover:-translate-y-1 hover:shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">{{ $stat['label'] }}</p>
+                            <p class="text-3xl font-bold text-slate-900 mt-2">{{ $stat['count'] }}</p>
+                        </div>
+                        <div class="rounded-xl {{ $stat['bg'] }} p-3 {{ $stat['color'] }}">
+                            <flux:icon :name="$stat['icon']" class="w-6 h-6" />
+                        </div>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Project::count() }}</span>
+                    <div class="mt-4 flex items-center text-xs font-medium text-slate-400 group-hover:text-primary-600 transition-colors">
+                        Manage {{ strtolower($stat['label']) }} &rarr;
+                    </div>
+                </a>
+            @endforeach
+        </div>
+
+        <!-- Quick Actions / More Stats -->
+        <div class="grid gap-6 md:grid-cols-3">
+            <!-- Education -->
+            <a href="{{ route('admin.educations.index') }}" class="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm border border-slate-100 transition-all hover:border-primary-200 hover:shadow-md">
+                <div class="rounded-xl bg-indigo-50 p-3 text-indigo-600">
+                    <flux:icon name="book-open" class="w-6 h-6" />
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Projects</h3>
-                <p class="text-sm text-slate-500">Manage portfolio projects</p>
+                <div>
+                    <h3 class="font-semibold text-slate-900">Education</h3>
+                    <p class="text-sm text-slate-500">{{ \App\Models\Education::count() }} entries</p>
+                </div>
             </a>
 
-            <!-- Skills Card -->
-            <a href="{{ route('admin.skills.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-emerald-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-emerald-100 p-3 text-emerald-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Skill::count() }}</span>
+            <!-- Achievements -->
+            <a href="{{ route('admin.achievements.index') }}" class="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm border border-slate-100 transition-all hover:border-primary-200 hover:shadow-md">
+                <div class="rounded-xl bg-yellow-50 p-3 text-yellow-600">
+                    <flux:icon name="trophy" class="w-6 h-6" />
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Skills</h3>
-                <p class="text-sm text-slate-500">Manage technical skills</p>
+                <div>
+                    <h3 class="font-semibold text-slate-900">Achievements</h3>
+                    <p class="text-sm text-slate-500">{{ \App\Models\Achievement::count() }} awards</p>
+                </div>
             </a>
 
-            <!-- Activities Card -->
-            <a href="{{ route('admin.activities.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-blue-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-blue-100 p-3 text-blue-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Activity::count() }}</span>
+            <!-- Publications -->
+            <a href="{{ route('admin.publications.index') }}" class="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm border border-slate-100 transition-all hover:border-primary-200 hover:shadow-md">
+                <div class="rounded-xl bg-pink-50 p-3 text-pink-600">
+                    <flux:icon name="newspaper" class="w-6 h-6" />
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Activities</h3>
-                <p class="text-sm text-slate-500">Manage posts & updates</p>
-            </a>
-
-            <!-- Career Card -->
-            <a href="{{ route('admin.experiences.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-purple-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-purple-100 p-3 text-purple-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Experience::count() }}</span>
+                <div>
+                    <h3 class="font-semibold text-slate-900">Publications</h3>
+                    <p class="text-sm text-slate-500">{{ \App\Models\Publication::count() }} articles</p>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Career</h3>
-                <p class="text-sm text-slate-500">Manage work experience</p>
             </a>
-
-            <!-- Education Card -->
-            <a href="{{ route('admin.educations.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-indigo-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-indigo-100 p-3 text-indigo-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6-3.33V14.5a6 6 0 01-6 6 6 6 0 01-6-6V10.67L12 14z" /></svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Education::count() }}</span>
+        </div>
+        
+        <!-- System Status / Info -->
+        <div class="rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-white shadow-lg">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <h3 class="text-xl font-bold">System Status</h3>
+                    <p class="text-slate-300 mt-1">Your portfolio is live and running smoothly.</p>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Education</h3>
-                <p class="text-sm text-slate-500">Manage education entries</p>
-            </a>
-
-            <!-- Achievements Card -->
-            <a href="{{ route('admin.achievements.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-yellow-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-yellow-100 p-3 text-yellow-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                <div class="flex gap-4">
+                    <div class="text-center">
+                        <span class="block text-2xl font-bold text-emerald-400">PHP {{ phpversion() }}</span>
+                        <span class="text-xs text-slate-400">Version</span>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Achievement::count() }}</span>
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Achievements</h3>
-                <p class="text-sm text-slate-500">Manage certifications & awards</p>
-            </a>
-
-            <!-- Publications Card -->
-            <a href="{{ route('admin.publications.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-orange-500 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="rounded-lg bg-orange-100 p-3 text-orange-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z" /></svg>
+                    <div class="w-px bg-white/10"></div>
+                    <div class="text-center">
+                        <span class="block text-2xl font-bold text-blue-400">{{ app()->version() }}</span>
+                        <span class="text-xs text-slate-400">Laravel</span>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Publication::count() }}</span>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Publications</h3>
-                <p class="text-sm text-slate-500">Manage publication entries</p>
-            </a>
+            </div>
+        </div>
 
-            <!-- CV / Resume Card -->
-            <a href="{{ route('admin.cv.index') }}" class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition hover:border-[#0A7396]">
-                <div class="flex items-center justify-between mb-4">
+    </div>
+</x-layouts.app>
                     <div class="rounded-lg bg-slate-100 p-3 text-[#0A7396]">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.657 1.343-3 3-3h4m0 0l-4-4m4 4l-4 4m-5 4H5a2 2 0 01-2-2V5a2 2 0 012-2h7m0 0v4a2 2 0 002 2h4m-6 6l-2 2m0 0l-2-2m2 2V9"></path></svg>
                     </div>

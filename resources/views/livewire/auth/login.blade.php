@@ -8,21 +8,21 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 </head>
-<body class="antialiased">
-    <div class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-[#CEF9FF] via-white to-[#D2F9E7]">
+<body class="antialiased font-sans text-slate-900 bg-slate-50">
+    <div class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-primary-50">
         <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
         
         <div class="relative z-10 w-full max-w-md p-6">
-            <div class="overflow-hidden rounded-2xl border border-white/20 bg-white/70 shadow-2xl backdrop-blur-xl">
+            <div class="overflow-hidden rounded-2xl border border-white/50 bg-white/80 shadow-xl backdrop-blur-xl ring-1 ring-slate-900/5">
                 <div class="p-8">
                     <div class="mb-8 text-center">
-                        <a href="{{ route('home') }}" class="text-3xl font-bold tracking-tight text-[#125C78]">
+                        <a href="{{ route('home') }}" class="text-3xl font-bold tracking-tight text-slate-900 hover:text-primary-600 transition-colors">
                             Abiya Makruf
                         </a>
-                        <h2 class="mt-4 text-xl font-semibold text-slate-800">{{ __('Welcome Back') }}</h2>
-                        <p class="mt-2 text-sm text-slate-600">{{ __('Please sign in to your account') }}</p>
-                        <div class="mt-3">
-                            <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-[#00B3DB] hover:text-[#0A7396]">
+                        <h2 class="mt-4 text-xl font-semibold text-slate-900">{{ __('Welcome Back') }}</h2>
+                        <p class="mt-2 text-sm text-slate-500">{{ __('Please sign in to your account') }}</p>
+                        <div class="mt-4">
+                            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors">
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7m-7 7h18" /></svg>
                                 {{ __('Back to home') }}
                             </a>
@@ -45,40 +45,43 @@
                             autofocus
                             autocomplete="email"
                             placeholder="email@example.com"
-                            class="bg-white/50"
+                            class="bg-white"
                         />
 
                         <!-- Password -->
-                        <div class="relative">
-                            <flux:input
-                                name="password"
-                                :label="__('Password')"
-                                type="password"
-                                required
-                                autocomplete="current-password"
-                                :placeholder="__('Password')"
-                                viewable
-                                class="bg-white/50"
-                            />
+                        <flux:input
+                            name="password"
+                            :label="__('Password')"
+                            type="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="••••••••"
+                            class="bg-white"
+                            viewable
+                        />
 
+                        <!-- Remember Me -->
+                        <div class="flex items-center justify-between">
+                            <flux:checkbox name="remember" :label="__('Remember me')" />
+                            
                             @if (Route::has('password.request'))
-                                <flux:link class="absolute top-0 text-sm end-0 text-[#00B3DB] hover:text-[#0A7396]" :href="route('password.request')" wire:navigate>
+                                <a class="text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline" href="{{ route('password.request') }}">
                                     {{ __('Forgot password?') }}
-                                </flux:link>
+                                </a>
                             @endif
                         </div>
 
-                        <!-- Remember Me -->
-                        <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
-
-                        <div class="flex items-center justify-end">
-                            <button type="submit" class="w-full rounded-xl bg-[#125C78] px-8 py-3 font-semibold text-white shadow-xl shadow-[#125C78]/20 transition hover:-translate-y-1 hover:bg-[#0A7396]">
+                        <div class="flex items-center justify-end mt-2">
+                            <flux:button variant="primary" type="submit" class="w-full justify-center !bg-primary-600 hover:!bg-primary-700 !border-transparent !text-white">
                                 {{ __('Log in') }}
-                            </button>
+                            </flux:button>
                         </div>
                     </form>
                 </div>
             </div>
+            <p class="mt-6 text-center text-xs text-slate-400">
+                &copy; {{ date('Y') }} Abiya Makruf. All rights reserved.
+            </p>
         </div>
     </div>
     @fluxScripts
