@@ -49,7 +49,7 @@ class EducationController extends Controller
 
         $education->update($data);
 
-        return redirect()->route('admin.educations.index')->with('success', 'Education updated.');
+        return back()->with('success', 'Education updated.');
     }
 
     public function destroy(Education $education)

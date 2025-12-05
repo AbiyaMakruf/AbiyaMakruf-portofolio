@@ -87,7 +87,7 @@ class ActivityController extends Controller
 
         $activity->update($data);
 
-        return redirect()->route('admin.activities.index')->with('success', 'Activity updated.');
+        return back()->with('success', 'Activity updated.');
     }
 
     /**

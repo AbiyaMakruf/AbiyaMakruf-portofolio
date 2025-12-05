@@ -34,16 +34,16 @@
                                                 </div>
                                                 <div class="text-sm font-medium text-[#125C78]">{{ $experience->company }}</div>
                                                 <p class="text-sm text-slate-600 line-clamp-2">{{ $experience->description }}</p>
-                                                @if($experience->highlights)
-                                                    <ul class="mt-2 grid gap-2 sm:grid-cols-2 text-sm text-slate-600">
-                                                        @foreach(array_slice($experience->highlights, 0, 2) as $item)
-                                                            <li class="flex items-start gap-2">
-                                                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#15B489]"></span>
-                                                                <span>{{ $item }}</span>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
+                                                    @if($experience->highlights)
+                                                        <ul class="mt-2 grid gap-2 text-sm text-slate-600">
+                                                            @foreach(array_slice($experience->highlights, 0, 4) as $item)
+                                                                <li class="flex items-start gap-2">
+                                                                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#15B489]"></span>
+                                                                    <span>{{ $item }}</span>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
                                             </div>
                                         </div>
                                     </div>

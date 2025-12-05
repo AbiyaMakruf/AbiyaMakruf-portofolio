@@ -55,32 +55,30 @@ class AchievementController extends Controller
         if ($image) {
             $data['image_path'] = $image;
         }
-        $existing = $achievement->gallery ?? [];
+        $existing = array_values(array_filter($achievement->gallery ?? []));
         if ($request->has('delete_gallery')) {
             $existing = array_values(array_diff($existing, (array) $request->delete_gallery));
         }
         if ($gallery) {
             $existing = array_values(array_filter(array_merge($existing, $gallery)));
         }
-        if ($existing) {
-            $data['gallery'] = $existing;
-        } else {
-            $data['gallery'] = null;
-        }
+        $data['gallery'] = $existing ?: null;
         if ($certificateUrl) {
             $data['certificate_url'] = $certificateUrl;
         }
 
-        $achievement->update([
+        $payload = [
             'title' => $data['title'],
             'description' => $data['description'] ?? null,
             'date' => $data['date'] ?? null,
-            'certificate_url' => $data['certificate_url'] ?? $achievement->certificate_url,
+            'certificate_url' => array_key_exists('certificate_url', $data) ? $data['certificate_url'] : $achievement->certificate_url,
             'image_path' => $data['image_path'] ?? $achievement->image_path,
-            'gallery' => $data['gallery'] ?? $achievement->gallery,
-        ]);
+            'gallery' => $data['gallery'],
+        ];
 
-        return redirect()->route('admin.achievements.index')->with('success', 'Achievement updated.');
+        $achievement->update($payload);
+
+        return back()->with('success', 'Achievement updated.');
     }
 
     public function destroy(string $id)

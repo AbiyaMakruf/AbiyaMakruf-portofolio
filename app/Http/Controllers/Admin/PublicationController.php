@@ -57,7 +57,7 @@ class PublicationController extends Controller
 
         $publication->update($data);
 
-        return redirect()->route('admin.publications.index')->with('success', 'Publication updated.');
+        return back()->with('success', 'Publication updated.');
     }
 
     public function destroy(Publication $publication)

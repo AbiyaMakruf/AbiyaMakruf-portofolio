@@ -85,7 +85,7 @@ class SkillController extends Controller
 
         $skill->update($data);
 
-        return redirect()->route('admin.skills.index')->with('success', 'Skill updated.');
+        return back()->with('success', 'Skill updated.');
     }
 
     /**

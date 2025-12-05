@@ -54,8 +54,7 @@ class ProjectController extends Controller
         }
 
         // Remove gallery placeholder from attributes; handled separately
-        unset($validated['gallery']);
-        unset($validated['thumbnail']);
+        unset($validated['gallery'], $validated['thumbnail'], $validated['delete_gallery'], $validated['existing_gallery']);
 
         $project = Project::create($validated);
 
@@ -111,8 +110,12 @@ class ProjectController extends Controller
             $validated['thumbnail_path'] = Storage::disk('gcs')->url($path);
         }
 
-        unset($validated['gallery']);
-        unset($validated['thumbnail']);
+        unset(
+            $validated['gallery'],
+            $validated['thumbnail'],
+            $validated['delete_gallery'],
+            $validated['existing_gallery']
+        );
 
         $project->update($validated);
 
@@ -143,7 +146,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+        return back()->with('success', 'Project updated successfully.');
     }
 
     public function destroy(Project $project)
