@@ -43,8 +43,8 @@
                             <ul class="grid gap-2 text-slate-700">
                                 @foreach($experience->highlights as $item)
                                     <li class="flex items-start gap-2">
-                                        <span class="mt-1 h-2 w-2 rounded-full bg-[#15B489]"></span>
-                                        <span>{{ $item }}</span>
+                                        <span class="mt-1.5 h-2 w-2 rounded-full bg-[#15B489] flex-shrink-0 self-start"></span>
+                                        <span class="leading-relaxed">{{ $item }}</span>
                                     </li>
                                 @endforeach
                             </ul>
