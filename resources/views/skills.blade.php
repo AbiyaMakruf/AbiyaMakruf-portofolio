@@ -11,8 +11,8 @@
             <!-- Skills by category -->
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 @foreach($skills as $category => $categorySkills)
-                    <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                        <h3 class="mb-4 text-xl font-bold text-[#0A7396]">{{ $category }}</h3>
+                    <div class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-500/20 hover:border-primary-200 hover:scale-[1.02]">
+                        <h3 class="mb-4 text-xl font-bold text-[#0A7396] transition-colors duration-300 group-hover:text-primary-500">{{ $category }}</h3>
                         <div class="flex flex-wrap gap-2">
                             @foreach($categorySkills as $skill)
                                 <div class="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 border border-slate-100">
@@ -35,9 +35,9 @@
                 </div>
                 <div class="grid gap-6 md:grid-cols-2">
                     @forelse($achievements as $achievement)
-                        <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden cursor-pointer" @click="open === {{ $achievement->id }} ? open = null : open = {{ $achievement->id }}">
+                        <article class="group rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-500/20 hover:border-primary-200 hover:scale-[1.02]" @click="open === {{ $achievement->id }} ? open = null : open = {{ $achievement->id }}">
                             @if($achievement->image_path)
-                                <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="h-40 w-full object-contain bg-slate-50">
+                                <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="h-40 w-full object-contain bg-slate-50 transition-transform duration-700 ease-out group-hover:scale-110">
                             @endif
                             <div class="p-6 space-y-3">
                                 <div class="flex items-center gap-3 text-xs text-slate-500">
@@ -117,9 +117,9 @@
                 </div>
                 <div class="grid gap-6 md:grid-cols-2">
                     @forelse($publications as $pub)
-                        <article class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden cursor-pointer" @click="openPub === {{ $pub->id }} ? openPub = null : openPub = {{ $pub->id }}">
+                        <article class="group rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-500/20 hover:border-primary-200 hover:scale-[1.02]" @click="openPub === {{ $pub->id }} ? openPub = null : openPub = {{ $pub->id }}">
                             @if($pub->certificate_image_path)
-                                <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="h-40 w-full object-contain bg-slate-50">
+                                <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="h-40 w-full object-contain bg-slate-50 transition-transform duration-700 ease-out group-hover:scale-110">
                             @endif
                             <div class="p-6 space-y-3">
                                 <div class="flex items-center gap-3 text-xs text-slate-500">

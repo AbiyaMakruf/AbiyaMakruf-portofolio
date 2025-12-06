@@ -20,11 +20,11 @@
                             @foreach($items as $experience)
                                 <a href="{{ route('career.show', $experience->slug ?? $experience) }}" class="block relative group">
                                     <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-white bg-[#00B3DB] group-hover:bg-[#0A7396] transition"></span>
-                                    <div class="rounded-xl border border-slate-100 bg-white/60 p-4 shadow-sm transition group-hover:-translate-y-1 group-hover:shadow-md">
+                                    <div class="rounded-xl border border-slate-100 bg-white/60 p-4 shadow-sm transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-primary-500/20 group-hover:border-primary-200 group-hover:scale-[1.02] group-hover:bg-white">
                                         <div class="flex gap-4">
                                             @if($experience->thumbnail_path)
                                                 <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-slate-100">
-                                                    <img src="{{ $experience->thumbnail_path }}" alt="Logo" class="h-full w-full object-cover">
+                                                    <img src="{{ $experience->thumbnail_path }}" alt="Logo" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-2">
                                                 </div>
                                             @endif
                                             <div class="flex-1 space-y-2">
@@ -63,15 +63,16 @@
                 </h2>
                 <div class="space-y-12 border-l-2 border-slate-100 pl-8 ml-4">
                     @foreach($educations as $education)
-                        <div class="relative">
-                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-white bg-[#15B489]"></span>
-                            <div class="flex gap-4 items-start">
-                                @if($education->thumbnail_path)
-                                    <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-slate-100">
-                                        <img src="{{ $education->thumbnail_path }}" alt="{{ $education->institution }}" class="h-full w-full object-cover">
-                                    </div>
-                                @endif
-                                <div class="space-y-1">
+                        <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-white bg-[#15B489] group-hover:bg-accent-500 transition-colors duration-300"></span>
+                            <div class="rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-500/20 hover:border-accent-200 hover:scale-[1.02]">
+                                <div class="flex gap-4 items-start">
+                                    @if($education->thumbnail_path)
+                                        <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-slate-100">
+                                            <img src="{{ $education->thumbnail_path }}" alt="{{ $education->institution }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-2">
+                                        </div>
+                                    @endif
+                                    <div class="space-y-1">
                                     <h3 class="text-xl font-bold text-slate-800">{{ $education->institution }}</h3>
                                     <div class="text-lg font-medium text-[#125C78]">{{ $education->degree }} {{ $education->major ? 'in ' . $education->major : '' }}</div>
                                     <div class="text-sm text-slate-500">
@@ -81,6 +82,7 @@
                                     <p class="text-slate-600">{{ $education->description }}</p>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     @endforeach
                 </div>
