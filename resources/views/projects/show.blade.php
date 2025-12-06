@@ -111,7 +111,7 @@
                     <div class="grid gap-4">
                         @foreach($project->videos as $video)
                             <div class="overflow-hidden rounded-xl border border-slate-100 shadow-sm bg-slate-50">
-                                <video class="w-full" controls>
+                                <video class="w-full" controls preload="metadata" muted autoplay loop playsinline>
                                     <source src="{{ $video }}">
                                     Your browser does not support the video tag.
                                 </video>
