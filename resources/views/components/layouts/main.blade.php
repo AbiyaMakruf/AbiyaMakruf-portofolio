@@ -33,20 +33,24 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex items-center gap-8">
                     <a href="{{ route('projects.index') }}" 
-                       class="text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('projects.*') ? 'text-primary-500' : '' }}">
+                       class="relative text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('projects.*') ? 'text-primary-500' : '' }} group">
                         Projects
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="{{ route('skills') }}" 
-                       class="text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('skills') ? 'text-primary-500' : '' }}">
+                       class="relative text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('skills') ? 'text-primary-500' : '' }} group">
                         Skills & Achievements
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="{{ route('career') }}" 
-                       class="text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('career*') ? 'text-primary-500' : '' }}">
+                       class="relative text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('career*') ? 'text-primary-500' : '' }} group">
                         Career
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="{{ route('activity') }}" 
-                       class="text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('activity') ? 'text-primary-500' : '' }}">
+                       class="relative text-sm font-medium text-zinc-600 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('activity') ? 'text-primary-500' : '' }} group">
                         Activity
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
                 </div>
 
