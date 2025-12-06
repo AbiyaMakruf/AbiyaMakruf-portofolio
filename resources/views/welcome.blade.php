@@ -41,9 +41,7 @@
                     </a>
                     <button onclick="document.getElementById('ai-widget').scrollIntoView({behavior: 'smooth'})" 
                             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl border-2 border-zinc-200 bg-white text-zinc-700 font-semibold hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 hover:scale-105">
-                        <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+                        <img src="/gemini-color.svg" alt="Gemini" class="h-5 w-5">
                         <span>Ask AI About Me</span>
                     </button>
                 </div>
@@ -276,9 +274,7 @@
             <!-- Section Header -->
             <div class="text-center space-y-4 mb-12 animate-fadeInUp">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-xl border border-white/20">
-                    <svg class="w-5 h-5 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+                    <img src="/gemini-color.svg" alt="Gemini" class="h-5 w-5">
                     <span class="text-sm font-semibold text-white">Powered by Google Gemini</span>
                 </div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-white">Ask AI About Me</h2>
@@ -389,7 +385,7 @@
                                    type="text" 
                                    x-model="question" 
                                    placeholder="e.g., What technologies do you work with?" 
-                                   class="flex-1 px-5 py-4 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder-zinc-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all duration-200">
+                                   class="flex-1 px-5 py-4 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 text-zinc-900 placeholder-zinc-500 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all duration-200 bg-white/80">
                             <button type="submit" 
                                     :disabled="loading || !question.trim()" 
                                     class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 flex items-center gap-2 whitespace-nowrap">
@@ -406,25 +402,25 @@
 
                         <!-- Example Questions -->
                         <div class="flex flex-wrap gap-2">
-                            <p class="w-full text-zinc-300 text-sm font-medium mb-1">Try asking:</p>
+                            <p class="w-full text-zinc-800 text-sm font-medium mb-1">Try asking:</p>
                             <button type="button" 
                                     @click="setExample('Tell me about your experience')" 
-                                    class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-200 border border-white/20 hover:border-white/30">
+                                    class="px-4 py-2 text-sm bg-white/80 hover:bg-white text-zinc-800 rounded-xl transition-all duration-200 border border-zinc-200 hover:border-primary-300">
                                 💼 Your experience
                             </button>
                             <button type="button" 
                                     @click="setExample('What are your technical skills?')" 
-                                    class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-200 border border-white/20 hover:border-white/30">
+                                    class="px-4 py-2 text-sm bg-white/80 hover:bg-white text-zinc-800 rounded-xl transition-all duration-200 border border-zinc-200 hover:border-primary-300">
                                 ⚡ Technical skills
                             </button>
                             <button type="button" 
                                     @click="setExample('What projects have you worked on?')" 
-                                    class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-200 border border-white/20 hover:border-white/30">
+                                    class="px-4 py-2 text-sm bg-white/80 hover:bg-white text-zinc-800 rounded-xl transition-all duration-200 border border-zinc-200 hover:border-primary-300">
                                 🚀 Projects
                             </button>
                             <button type="button" 
                                     @click="setExample('How can I contact you?')" 
-                                    class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-200 border border-white/20 hover:border-white/30">
+                                    class="px-4 py-2 text-sm bg-white/80 hover:bg-white text-zinc-800 rounded-xl transition-all duration-200 border border-zinc-200 hover:border-primary-300">
                                 📧 Contact info
                             </button>
                         </div>

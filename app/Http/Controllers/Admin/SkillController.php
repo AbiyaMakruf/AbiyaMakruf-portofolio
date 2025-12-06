@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SkillController extends Controller
 {
@@ -44,9 +45,15 @@ class SkillController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'level' => 'nullable|string|max:100',
-            'icon_path' => 'nullable|string|max:500',
+            'level' => 'nullable|in:Beginner,Intermediate,Advanced,Expert',
+            'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif,svg|max:4096',
         ]);
+
+        unset($data['icon']);
+        if ($request->hasFile('icon')) {
+            $path = $request->file('icon')->store('skills/icons', 'gcs');
+            $data['icon_path'] = Storage::disk('gcs')->url($path);
+        }
 
         Skill::create($data);
 
@@ -79,9 +86,15 @@ class SkillController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'level' => 'nullable|string|max:100',
-            'icon_path' => 'nullable|string|max:500',
+            'level' => 'nullable|in:Beginner,Intermediate,Advanced,Expert',
+            'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif,svg|max:4096',
         ]);
+
+        unset($data['icon']);
+        if ($request->hasFile('icon')) {
+            $path = $request->file('icon')->store('skills/icons', 'gcs');
+            $data['icon_path'] = Storage::disk('gcs')->url($path);
+        }
 
         $skill->update($data);
 
