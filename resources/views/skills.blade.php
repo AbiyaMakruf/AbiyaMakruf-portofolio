@@ -54,10 +54,9 @@
                         </article>
                         <!-- Modal -->
                         <div x-show="open === {{ $achievement->id }}" x-transition class="fixed inset-0 z-50 flex items-start justify-center bg-black/60 p-4 overflow-y-auto overscroll-contain" @click.self="open = null" @keydown.escape.window="open = null">
-                            <div class="max-w-3xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl" @wheel.stop>
+                            <div class="max-w-3xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl" @wheel.stop x-data="{ viewerOpen:false, viewerCurrent:0, viewerItems:@js($achievement->gallery ?? []) }">
                                 <div class="flex justify-between items-center px-4 py-3 border-b border-slate-100">
                                     <div>
-                                        <p class="text-xs text-slate-500">{{ $achievement->date?->format('d M Y') ?? 'No date' }}</p>
                                         <h3 class="text-xl font-bold text-slate-800">{{ $achievement->title }}</h3>
                                     </div>
                                     <button class="text-slate-400 hover:text-slate-600" @click="open = null">✕</button>
@@ -68,12 +67,30 @@
                                             <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="w-full object-contain max-h-72 mx-auto">
                                         </div>
                                     @endif
+                                    <p class="text-xs text-slate-500">{{ $achievement->date?->format('d M Y') ?? 'No date' }}</p>
                                     <p class="text-slate-700 leading-relaxed">{{ $achievement->description }}</p>
                                     @if($achievement->gallery)
-                                        <div class="grid gap-3 sm:grid-cols-3">
-                                            @foreach($achievement->gallery as $image)
-                                                <img src="{{ $image }}" class="w-full rounded-lg border border-slate-100 object-contain bg-slate-50 max-h-40" alt="Gallery">
+                                        <div class="grid gap-3 grid-cols-2 sm:grid-cols-3">
+                                            @foreach($achievement->gallery as $idx => $image)
+                                                <button type="button" class="w-full rounded-lg border border-slate-100 bg-slate-50 overflow-hidden" @click="viewerCurrent={{ $idx }}; viewerOpen=true">
+                                                    <img src="{{ $image }}" class="w-full object-cover h-28" alt="Gallery">
+                                                </button>
                                             @endforeach
+                                        </div>
+                                        <div x-show="viewerOpen" x-transition class="fixed inset-0 z-60 flex items-center justify-center bg-black/70 p-4" @click.self="viewerOpen=false">
+                                            <div class="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+                                                <div class="bg-slate-50 flex items-center justify-center">
+                                                    <template x-if="viewerItems.length">
+                                                        <img :src="viewerItems[viewerCurrent]" class="max-h-[80vh] w-full object-contain">
+                                                    </template>
+                                                </div>
+                                                <div class="absolute inset-y-0 left-0 flex items-center z-10">
+                                                    <button type="button" class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="viewerCurrent = (viewerCurrent - 1 + viewerItems.length) % viewerItems.length">‹</button>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-0 flex items-center z-10">
+                                                    <button type="button" class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="viewerCurrent = (viewerCurrent + 1) % viewerItems.length">›</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
                                 </div>
@@ -111,10 +128,9 @@
                             </div>
                         </article>
                         <div x-show="openPub === {{ $pub->id }}" x-transition class="fixed inset-0 z-50 flex items-start justify-center bg-black/60 p-4 overflow-y-auto overscroll-contain" @click.self="openPub = null" @keydown.escape.window="openPub = null">
-                            <div class="max-w-3xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl" @wheel.stop>
+                            <div class="max-w-3xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl" @wheel.stop x-data="{ viewerOpen:false, viewerCurrent:0, viewerItems:@js($pub->gallery ?? []) }">
                                 <div class="flex justify-between items-center px-4 py-3 border-b border-slate-100">
                                     <div>
-                                        <p class="text-xs text-slate-500">{{ $pub->published_at?->format('d M Y') ?? 'No date' }}</p>
                                         <h3 class="text-xl font-bold text-slate-800">{{ $pub->title }}</h3>
                                     </div>
                                     <button class="text-slate-400 hover:text-slate-600" @click="openPub = null">✕</button>
@@ -125,12 +141,30 @@
                                             <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="w-full object-contain max-h-72 mx-auto">
                                         </div>
                                     @endif
+                                    <p class="text-xs text-slate-500">{{ $pub->published_at?->format('d M Y') ?? 'No date' }}</p>
                                     <p class="text-slate-700 leading-relaxed">{{ $pub->description }}</p>
                                     @if($pub->gallery)
-                                        <div class="grid gap-3 sm:grid-cols-3">
-                                            @foreach($pub->gallery as $image)
-                                                <img src="{{ $image }}" class="w-full rounded-lg border border-slate-100 object-contain bg-slate-50 max-h-40" alt="Gallery">
+                                        <div class="grid gap-3 grid-cols-2 sm:grid-cols-3">
+                                            @foreach($pub->gallery as $idx => $image)
+                                                <button type="button" class="w-full rounded-lg border border-slate-100 bg-slate-50 overflow-hidden" @click="viewerCurrent={{ $idx }}; viewerOpen=true">
+                                                    <img src="{{ $image }}" class="w-full object-cover h-28" alt="Gallery">
+                                                </button>
                                             @endforeach
+                                        </div>
+                                        <div x-show="viewerOpen" x-transition class="fixed inset-0 z-60 flex items-center justify-center bg-black/70 p-4" @click.self="viewerOpen=false">
+                                            <div class="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+                                                <div class="bg-slate-50 flex items-center justify-center">
+                                                    <template x-if="viewerItems.length">
+                                                        <img :src="viewerItems[viewerCurrent]" class="max-h-[80vh] w-full object-contain">
+                                                    </template>
+                                                </div>
+                                                <div class="absolute inset-y-0 left-0 flex items-center z-10">
+                                                    <button type="button" class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="viewerCurrent = (viewerCurrent - 1 + viewerItems.length) % viewerItems.length">‹</button>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-0 flex items-center z-10">
+                                                    <button type="button" class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="viewerCurrent = (viewerCurrent + 1) % viewerItems.length">›</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
                                 </div>
