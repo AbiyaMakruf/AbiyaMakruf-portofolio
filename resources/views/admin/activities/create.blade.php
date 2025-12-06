@@ -46,6 +46,13 @@
                     @error('gallery_images.*') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
 
+                <div>
+                    <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Videos (upload multiple)</label>
+                    <input type="file" name="videos[]" multiple accept="video/mp4,video/webm,video/ogg" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+                    <p class="text-xs text-slate-500 mt-1">Max 20MB per video.</p>
+                    @error('videos.*') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                </div>
+
                 <div class="flex justify-end">
                     <button type="submit" class="rounded-lg bg-[#125C78] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">
                         Save Activity
