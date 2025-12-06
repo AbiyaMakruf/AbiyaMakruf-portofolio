@@ -40,7 +40,7 @@
 
             <h1 class="mb-6 text-4xl font-bold text-[#125C78]">{{ $project->title }}</h1>
 
-            <div class="markdown-content text-lg max-w-none mb-12">
+            <div class="markdown-content max-w-none mb-12">
                 {!! Str::markdown($project->full_description) !!}
             </div>
 
