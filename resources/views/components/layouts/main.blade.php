@@ -12,12 +12,10 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-primary-500 selection:text-white flex flex-col min-h-screen" 
-      x-data="{ scrolled: false, mobileMenuOpen: false }" 
-      @scroll.window="scrolled = (window.pageYOffset > 50)">
+      x-data="{ mobileMenuOpen: false }">
     
     <!-- Modern Navbar -->
-    <nav class="fixed top-0 z-50 w-full transition-all duration-300"
-         :class="scrolled ? 'glass shadow-elegant' : 'bg-transparent'">
+    <nav class="fixed top-0 z-50 w-full transition-all duration-300 bg-white shadow-elegant border-b border-zinc-100">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-20 items-center justify-between">
                 <!-- Logo -->
