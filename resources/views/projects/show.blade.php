@@ -29,6 +29,19 @@
                 </div>
             @endif
 
+            @if($project->videos)
+                <div class="mb-12 grid gap-4">
+                    @foreach($project->videos as $video)
+                        <div class="overflow-hidden rounded-xl border border-slate-100 shadow-sm bg-slate-50">
+                            <video class="w-full" controls>
+                                <source src="{{ $video }}">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="flex flex-wrap items-center gap-4 mb-6">
                 <span class="rounded-full bg-[#CEF9FF] px-3 py-1 text-sm font-medium text-[#0A7396]">{{ $project->category }}</span>
                 

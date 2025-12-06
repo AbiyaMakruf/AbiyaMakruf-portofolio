@@ -94,6 +94,12 @@
                             </div>
                         </template>
                     </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700">Videos (upload multiple)</label>
+                        <input type="file" name="videos[]" multiple accept="video/mp4,video/webm,video/ogg" class="mt-2 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                        <p class="text-xs text-slate-500 mt-1">Max 20MB per video.</p>
+                    </div>
                 </div>
 
                 <div class="flex justify-end pt-2">

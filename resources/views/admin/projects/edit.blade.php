@@ -111,6 +111,25 @@
                             </div>
                         </template>
                     </div>
+
+                    <div class="mt-4 space-y-3">
+                        <label class="block text-sm font-semibold text-slate-700">Videos</label>
+                        @if($project->videos)
+                            <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                                @foreach($project->videos as $video)
+                                    <label class="relative block rounded-lg border border-slate-200 bg-slate-50 p-2">
+                                        <video class="w-full rounded" controls>
+                                            <source src="{{ $video }}">
+                                        </video>
+                                        <input type="checkbox" name="delete_videos[]" value="{{ $video }}" class="absolute top-2 left-2 h-4 w-4">
+                                        <span class="absolute top-2 left-8 text-xs bg-white/80 px-2 py-0.5 rounded">Remove</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        @endif
+                        <input type="file" name="videos[]" multiple accept="video/mp4,video/webm,video/ogg" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                        <p class="text-xs text-slate-500">Max 20MB per video.</p>
+                    </div>
                 </div>
 
                 <div class="flex justify-end pt-2">

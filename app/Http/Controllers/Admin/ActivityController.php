@@ -115,8 +115,8 @@ class ActivityController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'thumbnail' => 'nullable|image|max:4096',
-            'gallery_images.*' => 'nullable|image|max:4096',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'videos.*' => 'nullable|mimetypes:video/mp4,video/webm,video/ogg|max:20480',
             'tags' => 'nullable|string',
             'published_at' => 'nullable|date',

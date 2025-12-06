@@ -73,9 +73,9 @@ class PublicationController extends Controller
             'published_at' => 'nullable|date',
             'doi_url' => 'nullable|url|max:500',
             'description' => 'nullable|string',
-            'certificate_image' => 'nullable|image|max:4096',
+            'certificate_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'nullable|image|max:4096',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
         return [
