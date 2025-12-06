@@ -53,8 +53,8 @@
                             </div>
                         </article>
                         <!-- Modal -->
-                        <div x-show="open === {{ $achievement->id }}" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" @click.self="open = null">
-                            <div class="max-w-3xl w-full overflow-hidden rounded-2xl bg-white shadow-2xl">
+                        <div x-show="open === {{ $achievement->id }}" x-transition class="fixed inset-0 z-50 flex items-start justify-center bg-black/60 p-4 overflow-y-auto overscroll-contain" @click.self="open = null" @keydown.escape.window="open = null">
+                            <div class="max-w-3xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl" @wheel.stop>
                                 <div class="flex justify-between items-center px-4 py-3 border-b border-slate-100">
                                     <div>
                                         <p class="text-xs text-slate-500">{{ $achievement->date?->format('d M Y') ?? 'No date' }}</p>
@@ -110,8 +110,8 @@
                                 <span class="text-sm font-semibold text-[#00B3DB]">Read more →</span>
                             </div>
                         </article>
-                        <div x-show="openPub === {{ $pub->id }}" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" @click.self="openPub = null">
-                            <div class="max-w-3xl w-full overflow-hidden rounded-2xl bg-white shadow-2xl">
+                        <div x-show="openPub === {{ $pub->id }}" x-transition class="fixed inset-0 z-50 flex items-start justify-center bg-black/60 p-4 overflow-y-auto overscroll-contain" @click.self="openPub = null" @keydown.escape.window="openPub = null">
+                            <div class="max-w-3xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl" @wheel.stop>
                                 <div class="flex justify-between items-center px-4 py-3 border-b border-slate-100">
                                     <div>
                                         <p class="text-xs text-slate-500">{{ $pub->published_at?->format('d M Y') ?? 'No date' }}</p>
