@@ -174,12 +174,13 @@
                             $contactEmail = \App\Models\SiteSetting::where('key','contact_email')->value('value');
                             $contactPhone = \App\Models\SiteSetting::where('key','contact_phone')->value('value');
                             $contactLocation = \App\Models\SiteSetting::where('key','contact_location')->value('value');
+                            $waPhone = $contactPhone ? preg_replace('/\D+/', '', $contactPhone) : null;
                         @endphp
                         @if($contactEmail)
                             <li><a href="mailto:{{ $contactEmail }}" class="hover:text-primary-400 transition-colors duration-200">{{ $contactEmail }}</a></li>
                         @endif
                         @if($contactPhone)
-                            <li><a href="tel:{{ $contactPhone }}" class="hover:text-primary-400 transition-colors duration-200">{{ $contactPhone }}</a></li>
+                            <li><a href="http://wa.me/{{ $waPhone }}" class="hover:text-primary-400 transition-colors duration-200" target="_blank" rel="noopener">{{ $contactPhone }}</a></li>
                         @endif
                         @if($contactLocation)
                             <li>{{ $contactLocation }}</li>
