@@ -1,0 +1,23 @@
+- Pada halaman skill section achievements & publications  Ketika read more di klik kan muncul popup, namun pada mode mobile jika teks dan gambar terlalu banyak tidak popup tersebut terpotong dan tidak dapat di scroll. tolong perbaiki.
+- menurut user teks "certificate" dan "doi" tidak terlihat seperti button, tolong perbaiki UI/UX nya.
+- Ketika terjadi popup kan ada image gallery, modifikasi sehingga gambar gambar di image gallery tersebut bisa di klik sehingga gambarnya menjadi lebih besar dan jelas.
+- modifikasi halaman add skill sehingga pengguna melakukan upload icon bukan memberikan icon url.
+- ubah icon pada element ini agar menggunakan icon gemini yang sudah tersedia di folder public <button onclick="document.getElementById('ai-widget').scrollIntoView({behavior: 'smooth'})" class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl border-2 border-zinc-200 bg-white text-zinc-700 font-semibold hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 hover:scale-105">
+                        <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                        <span>Ask AI About Me</span>
+                    </button>
+- warna teks pada field untuk menggunakan fitur "Ask AI" berwarna putih sehingga tidak terlihat, tolong ubah menjadi arna hitam.
+- Di footer hapus bagian Navigation supaya tidak redundan dengan header.
+- Button "ask ai" pada halaman Utama website Ketika mode mobile terpotong sehingga susah di klik.
+- ubah logo pada element ini agar menggunakan logo gemini. <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-xl border border-white/20">
+                    <svg class="w-5 h-5 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span class="text-sm font-semibold text-white">Powered by Google Gemini</span>
+                </div>
+- Ubah warna bg button yang digunakan ntuk melakukan filter category pada halaman project agar menggunakan warna gradient seperti pada button "download cv"
+
+
+- Buatkan animasi yang lebih modern dihalaman projects dan skill&achievement supaya Ketika di hover menggunakan mouse terdapat animasi.

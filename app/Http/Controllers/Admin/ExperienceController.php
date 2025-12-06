@@ -114,9 +114,9 @@ class ExperienceController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'description' => 'nullable|string',
             'highlights' => 'nullable|string',
-            'thumbnail' => 'nullable|image|max:4096',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'nullable|image|max:4096',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
         $slug = $validated['slug'] ?? null;

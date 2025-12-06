@@ -19,16 +19,6 @@
                     </div>
                 @endif
 
-                @if($experience->gallery && count($experience->gallery))
-                    <div class="grid gap-3 p-4 sm:grid-cols-2">
-                        @foreach($experience->gallery as $image)
-                            <div class="overflow-hidden rounded-xl border border-slate-100">
-                                <img src="{{ $image }}" alt="{{ $experience->role }} image" class="h-56 w-full object-cover">
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
                 <div class="p-8 space-y-6">
                     <div class="flex flex-wrap items-start justify-between gap-3">
                         <div>
@@ -53,11 +43,24 @@
                             <ul class="grid gap-2 text-slate-700">
                                 @foreach($experience->highlights as $item)
                                     <li class="flex items-start gap-2">
-                                        <span class="mt-1 h-2 w-2 rounded-full bg-[#15B489]"></span>
-                                        <span>{{ $item }}</span>
+                                        <span class="mt-1.5 h-2 w-2 rounded-full bg-[#15B489] flex-shrink-0 self-start"></span>
+                                        <span class="leading-relaxed">{{ $item }}</span>
                                     </li>
                                 @endforeach
                             </ul>
+                        </div>
+                    @endif
+
+                    @if($experience->gallery && count($experience->gallery))
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-semibold text-[#0A7396]">Gallery</h3>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach($experience->gallery as $image)
+                                    <div class="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+                                        <img src="{{ $image }}" alt="{{ $experience->role }} image" class="h-56 w-full object-cover">
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     @endif
                 </div>

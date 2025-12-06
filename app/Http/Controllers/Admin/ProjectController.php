@@ -32,8 +32,8 @@ class ProjectController extends Controller
             'tech_stack' => 'nullable|string', // Comma separated
             'github_url' => 'nullable|url',
             'website_url' => 'nullable|url',
-            'thumbnail' => 'nullable|image|max:2048',
-            'gallery.*.image' => 'nullable|image|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'gallery.*.image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'gallery.*.caption' => 'nullable|string|max:255',
             'status' => 'required|in:draft,published',
         ]);
@@ -71,6 +71,21 @@ class ProjectController extends Controller
             }
         }
 
+        // Handle Videos
+        $videoUrls = [];
+        if ($request->hasFile('videos')) {
+            foreach ($request->file('videos') as $file) {
+                if (!$file) {
+                    continue;
+                }
+                $path = $file->store('projects/videos', 'gcs');
+                $videoUrls[] = Storage::disk('gcs')->url($path);
+            }
+        }
+        if ($videoUrls) {
+            $project->update(['videos' => $videoUrls]);
+        }
+
         return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
@@ -94,6 +109,7 @@ class ProjectController extends Controller
             'gallery.*.caption' => 'nullable|string|max:255',
             'existing_gallery.*.caption' => 'nullable|string|max:255',
             'delete_gallery' => 'nullable|array',
+            'videos.*' => 'nullable|mimetypes:video/mp4,video/webm,video/ogg|max:20480',
             'status' => 'required|in:draft,published',
         ]);
 
@@ -114,7 +130,9 @@ class ProjectController extends Controller
             $validated['gallery'],
             $validated['thumbnail'],
             $validated['delete_gallery'],
-            $validated['existing_gallery']
+            $validated['existing_gallery'],
+            $validated['videos'],
+            $validated['delete_videos']
         );
 
         $project->update($validated);
@@ -145,6 +163,22 @@ class ProjectController extends Controller
                 }
             }
         }
+
+        // Videos handling
+        $existingVideos = $project->videos ?? [];
+        if ($request->has('delete_videos')) {
+            $existingVideos = array_values(array_diff($existingVideos, (array) $request->delete_videos));
+        }
+        $newVideos = [];
+        if ($request->hasFile('videos')) {
+            foreach ($request->file('videos') as $file) {
+                if (!$file) continue;
+                $path = $file->store('projects/videos', 'gcs');
+                $newVideos[] = Storage::disk('gcs')->url($path);
+            }
+        }
+        $mergedVideos = array_values(array_filter(array_merge($existingVideos, $newVideos)));
+        $project->update(['videos' => $mergedVideos ?: null]);
 
         return back()->with('success', 'Project updated successfully.');
     }

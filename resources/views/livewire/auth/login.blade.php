@@ -9,24 +9,22 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 </head>
 <body class="antialiased">
-    <div class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-[#CEF9FF] via-white to-[#D2F9E7]">
-        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+    <div class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-primary-400/10 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent-400/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        </div>
         
         <div class="relative z-10 w-full max-w-md p-6">
-            <div class="overflow-hidden rounded-2xl border border-white/20 bg-white/70 shadow-2xl backdrop-blur-xl">
-                <div class="p-8">
-                    <div class="mb-8 text-center">
-                        <a href="{{ route('home') }}" class="text-3xl font-bold tracking-tight text-[#125C78]">
+            <div class="overflow-hidden rounded-3xl border border-white/50 bg-white/80 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:shadow-3xl">
+                <div class="p-8 md:p-10">
+                    <div class="mb-8 text-center space-y-2">
+                        <a href="{{ route('home') }}" class="inline-block text-3xl font-bold tracking-tight bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
                             Abiya Makruf
                         </a>
-                        <h2 class="mt-4 text-xl font-semibold text-slate-800">{{ __('Welcome Back') }}</h2>
-                        <p class="mt-2 text-sm text-slate-600">{{ __('Please sign in to your account') }}</p>
-                        <div class="mt-3">
-                            <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-[#00B3DB] hover:text-[#0A7396]">
-                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7m-7 7h18" /></svg>
-                                {{ __('Back to home') }}
-                            </a>
-                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800">{{ __('Welcome Back') }}</h2>
+                        <p class="text-sm text-slate-600">{{ __('Please sign in to your account') }}</p>
                     </div>
 
                     <!-- Session Status -->
@@ -72,7 +70,7 @@
                         <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
 
                         <div class="flex items-center justify-end">
-                            <button type="submit" class="w-full rounded-xl bg-[#125C78] px-8 py-3 font-semibold text-white shadow-xl shadow-[#125C78]/20 transition hover:-translate-y-1 hover:bg-[#0A7396]">
+                            <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 px-8 py-4.5 text-lg font-bold text-white shadow-xl shadow-primary-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-500/50 hover:scale-[1.02] active:scale-[0.98]">
                                 {{ __('Log in') }}
                             </button>
                         </div>

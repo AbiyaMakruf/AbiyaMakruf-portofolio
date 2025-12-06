@@ -9,23 +9,326 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Modern Font System */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
+    /* Enhanced Color Palette - Modern & Professional */
+    --color-primary-50: #f0f9ff;
+    --color-primary-100: #e0f2fe;
+    --color-primary-200: #bae6fd;
+    --color-primary-300: #7dd3fc;
+    --color-primary-400: #38bdf8;
+    --color-primary-500: #0ea5e9;
+    --color-primary-600: #0284c7;
+    --color-primary-700: #0369a1;
+    --color-primary-800: #075985;
+    --color-primary-900: #0c4a6e;
+    --color-primary-950: #082f49;
+
+    --color-accent-50: #f0fdf4;
+    --color-accent-100: #dcfce7;
+    --color-accent-200: #bbf7d0;
+    --color-accent-300: #86efac;
+    --color-accent-400: #4ade80;
+    --color-accent-500: #22c55e;
+    --color-accent-600: #16a34a;
+    --color-accent-700: #15803d;
+    --color-accent-800: #166534;
+    --color-accent-900: #14532d;
+
+    /* Neutral Grays */
     --color-zinc-50: #fafafa;
-    --color-zinc-100: #f5f5f5;
-    --color-zinc-200: #e5e5e5;
-    --color-zinc-300: #d4d4d4;
-    --color-zinc-400: #a3a3a3;
-    --color-zinc-500: #737373;
-    --color-zinc-600: #525252;
-    --color-zinc-700: #404040;
-    --color-zinc-800: #262626;
-    --color-zinc-900: #171717;
-    --color-zinc-950: #0a0a0a;
+    --color-zinc-100: #f4f4f5;
+    --color-zinc-200: #e4e4e7;
+    --color-zinc-300: #d4d4d8;
+    --color-zinc-400: #a1a1aa;
+    --color-zinc-500: #71717a;
+    --color-zinc-600: #52525b;
+    --color-zinc-700: #3f3f46;
+    --color-zinc-800: #27272a;
+    --color-zinc-900: #18181b;
+    --color-zinc-950: #09090b;
+}
 
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
-    --color-accent-foreground: var(--color-white);
+@layer base {
+    /* Modern Base Styles */
+    * {
+        @apply border-zinc-200;
+    }
+
+    body {
+        @apply antialiased;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    }
+
+    /* Smooth Scrolling */
+    html {
+        @apply scroll-smooth;
+    }
+
+    /* Selection Colors */
+    ::selection {
+        @apply bg-primary-500 text-white;
+    }
+}
+
+@layer utilities {
+    /* Modern Animation System */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* Animation Classes */
+    .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .animate-fadeInUp {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .animate-scaleIn {
+        animation: scaleIn 0.5s ease-out;
+    }
+
+    .animate-slideInLeft {
+        animation: slideInLeft 0.6s ease-out;
+    }
+
+    .animate-slideInRight {
+        animation: slideInRight 0.6s ease-out;
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-shimmer {
+        animation: shimmer 2s infinite;
+        background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+        background-size: 1000px 100%;
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Glassmorphism Effect */
+    .glass {
+        @apply backdrop-blur-xl bg-white/70 border border-white/20;
+    }
+
+    .glass-dark {
+        @apply backdrop-blur-xl bg-zinc-900/70 border border-white/10;
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+        @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+    }
+
+    /* Modern Card Styles */
+    .card-modern {
+        @apply bg-white rounded-2xl shadow-lg border border-zinc-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    }
+
+    .card-glass {
+        @apply backdrop-blur-xl bg-white/60 rounded-2xl border border-white/20 shadow-lg;
+    }
+
+    /* Enhanced Transitions */
+    .transition-smooth {
+        @apply transition-all duration-300 ease-out;
+    }
+
+    /* Shadow Layers */
+    .shadow-elegant {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    .shadow-lifted {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08),
+                    0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    .shadow-premium {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Markdown Content Styling */
+    .markdown-content {
+        @apply text-slate-700 leading-relaxed;
+    }
+
+    .markdown-content h1 {
+        @apply text-2xl md:text-4xl font-bold text-primary-700 mb-3 md:mb-4 mt-6 md:mt-8;
+    }
+
+    .markdown-content h2 {
+        @apply text-xl md:text-3xl font-bold text-primary-700 mb-2 md:mb-3 mt-4 md:mt-6 pb-2 border-b border-slate-200;
+    }
+
+    .markdown-content h3 {
+        @apply text-lg md:text-2xl font-bold text-primary-600 mb-2 md:mb-3 mt-3 md:mt-5;
+    }
+
+    .markdown-content h4 {
+        @apply text-base md:text-xl font-semibold text-primary-600 mb-2 mt-3 md:mt-4;
+    }
+
+    .markdown-content h5 {
+        @apply text-base md:text-lg font-semibold text-slate-800 mb-2 mt-3;
+    }
+
+    .markdown-content h6 {
+        @apply text-sm md:text-base font-semibold text-slate-800 mb-2 mt-3;
+    }
+
+    .markdown-content p {
+        @apply text-sm md:text-base mb-3 md:mb-4 leading-relaxed;
+    }
+
+    .markdown-content a {
+        @apply text-primary-500 no-underline hover:underline hover:text-primary-600 transition-colors;
+    }
+
+    .markdown-content strong {
+        @apply font-bold text-primary-700;
+    }
+
+    .markdown-content em {
+        @apply italic text-slate-600;
+    }
+
+    .markdown-content ul {
+        @apply list-disc pl-5 md:pl-6 mb-3 md:mb-4 space-y-1 md:space-y-2;
+    }
+
+    .markdown-content ol {
+        @apply list-decimal pl-5 md:pl-6 mb-3 md:mb-4 space-y-1 md:space-y-2;
+    }
+
+    .markdown-content li {
+        @apply text-sm md:text-base text-slate-700 leading-relaxed pl-1 md:pl-2;
+    }
+
+    .markdown-content li::marker {
+        @apply text-primary-500 font-bold;
+    }
+
+    .markdown-content blockquote {
+        @apply border-l-4 border-primary-500 pl-3 md:pl-4 py-2 my-3 md:my-4 italic text-slate-600 bg-slate-50 rounded-r text-sm md:text-base;
+    }
+
+    .markdown-content code {
+        @apply text-primary-600 bg-slate-100 px-1 md:px-1.5 py-0.5 rounded text-xs md:text-sm font-mono;
+    }
+
+    .markdown-content pre {
+        @apply bg-slate-900 text-slate-100 p-3 md:p-4 rounded-xl overflow-x-auto my-3 md:my-4 text-xs md:text-sm;
+    }
+
+    .markdown-content pre code {
+        @apply bg-transparent text-slate-100 p-0;
+    }
+
+    .markdown-content img {
+        @apply rounded-xl shadow-lg my-3 md:my-4;
+    }
+
+    .markdown-content table {
+        @apply w-full border-collapse my-3 md:my-4 text-sm md:text-base;
+    }
+
+    .markdown-content th {
+        @apply bg-slate-100 border border-slate-300 px-2 md:px-4 py-1.5 md:py-2 text-left font-semibold text-slate-800 text-xs md:text-base;
+    }
+
+    .markdown-content td {
+        @apply border border-slate-300 px-2 md:px-4 py-1.5 md:py-2 text-xs md:text-base;
+    }
+
+    .markdown-content hr {
+        @apply border-t-2 border-slate-200 my-6 md:my-8;
+    }
 }
 
 @layer theme {
@@ -33,17 +336,6 @@
         --color-accent: var(--color-white);
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
-    }
-}
-
-@layer base {
-
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
     }
 }
 

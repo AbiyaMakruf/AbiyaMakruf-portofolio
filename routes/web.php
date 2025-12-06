@@ -48,6 +48,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('account/password', Password::class)->name('user-password.edit');
     Route::get('account/appearance', Appearance::class)->name('appearance.edit');
 
+    Route::post('/projects/beautify-description', [AiController::class, 'beautifyProjectDescription'])->name('projects.beautify');
+
     Route::get('settings/two-factor', TwoFactor::class)
         ->middleware(
             when(

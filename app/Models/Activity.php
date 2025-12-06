@@ -12,5 +12,6 @@ class Activity extends Model
         'tags' => 'array',
         'published_at' => 'datetime',
         'gallery' => 'array',
+        'videos' => 'array',
     ];
 }

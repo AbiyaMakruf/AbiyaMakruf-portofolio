@@ -42,21 +42,33 @@
                                         </button>
                                     @endforeach
                                 </div>
-                                <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" @click.self="open=false">
+                                <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" @click.self="open=false" @keydown.escape.window="open=false" tabindex="-1">
                                     <div class="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
-                                        <button class="absolute top-3 right-3 text-white bg-black/60 rounded-full p-2" @click="open=false">✕</button>
+                                        <button type="button" class="absolute top-3 right-3 z-20 text-white bg-black/60 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-white/70" @click.stop.prevent="open=false">
+                                            ✕
+                                        </button>
                                         <div class="bg-slate-50 flex items-center justify-center">
                                             <template x-if="images.length">
                                                 <img :src="images[current]" class="max-h-[80vh] w-full object-contain">
                                             </template>
                                         </div>
-                                        <div class="absolute inset-y-0 left-0 flex items-center">
-                                            <button class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="prev()">‹</button>
+                                        <div class="absolute inset-y-0 left-0 flex items-center z-10">
+                                            <button type="button" class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="prev()">‹</button>
                                         </div>
-                                        <div class="absolute inset-y-0 right-0 flex items-center">
-                                            <button class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="next()">›</button>
+                                        <div class="absolute inset-y-0 right-0 flex items-center z-10">
+                                            <button type="button" class="m-2 rounded-full bg-black/50 text-white p-2" @click.stop="next()">›</button>
                                         </div>
                                     </div>
+                                </div>
+                            @endif
+                            @if($activity->videos)
+                                <div class="mt-6 grid gap-4">
+                                    @foreach($activity->videos as $video)
+                                        <video class="w-full rounded-xl border border-slate-100 bg-slate-50" controls preload="metadata" muted autoplay loop playsinline>
+                                            <source src="{{ $video }}">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    @endforeach
                                 </div>
                             @endif
                         </div>

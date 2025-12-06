@@ -10,6 +10,7 @@ class Project extends Model
     
     protected $casts = [
         'tech_stack' => 'array',
+        'videos' => 'array',
     ];
 
     public function images()

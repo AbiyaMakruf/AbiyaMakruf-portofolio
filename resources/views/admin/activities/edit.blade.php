@@ -63,6 +63,25 @@
                     @error('gallery_images.*') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
 
+                <div class="space-y-3">
+                    <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Videos</label>
+                    @if($activity->videos)
+                        <div class="grid grid-cols-2 gap-3">
+                            @foreach($activity->videos as $video)
+                                <label class="relative block rounded-lg border border-slate-200 dark:border-slate-700 p-2 bg-slate-50">
+                                    <video class="w-full rounded" controls>
+                                        <source src="{{ $video }}">
+                                    </video>
+                                    <input type="checkbox" name="delete_videos[]" value="{{ $video }}" class="absolute top-2 left-2 h-4 w-4">
+                                    <span class="absolute top-2 left-8 text-xs bg-white/80 px-2 py-0.5 rounded">Remove</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    @endif
+                    <input type="file" name="videos[]" multiple accept="video/mp4,video/webm,video/ogg" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+                    <p class="text-xs text-slate-500">Max size 20MB per video.</p>
+                </div>
+
                 <div class="flex justify-end">
                     <button type="submit" class="rounded-lg bg-[#125C78] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0A7396]">
                         Update Activity

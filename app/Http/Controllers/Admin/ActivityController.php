@@ -67,7 +67,7 @@ class ActivityController extends Controller
         $activity = Activity::findOrFail($id);
         $data = $this->validateData($request, $activity->id);
 
-        [$thumb, $gallery] = $this->uploadImages($request);
+        [$thumb, $gallery, $videos] = $this->uploadImages($request);
 
         if ($thumb) {
             $data['thumbnail_path'] = $thumb;
@@ -84,6 +84,15 @@ class ActivityController extends Controller
         }
 
         $data['gallery'] = $existing ?: null;
+
+        $existingVideos = $activity->videos ?? [];
+        if ($request->has('delete_videos')) {
+            $existingVideos = array_values(array_diff($existingVideos, (array) $request->delete_videos));
+        }
+        if ($videos) {
+            $existingVideos = array_values(array_filter(array_merge($existingVideos, $videos)));
+        }
+        $data['videos'] = $existingVideos ?: null;
 
         $activity->update($data);
 
@@ -106,8 +115,9 @@ class ActivityController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'thumbnail' => 'nullable|image|max:4096',
-            'gallery_images.*' => 'nullable|image|max:4096',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'videos.*' => 'nullable|mimetypes:video/mp4,video/webm,video/ogg|max:20480',
             'tags' => 'nullable|string',
             'published_at' => 'nullable|date',
         ]);
@@ -128,6 +138,7 @@ class ActivityController extends Controller
     {
         $thumbUrl = null;
         $galleryUrls = [];
+        $videoUrls = [];
 
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('activities', 'gcs');
@@ -144,6 +155,16 @@ class ActivityController extends Controller
             }
         }
 
-        return [$thumbUrl, $galleryUrls];
+        if ($request->hasFile('videos')) {
+            foreach ($request->file('videos') as $file) {
+                if (!$file) {
+                    continue;
+                }
+                $path = $file->store('activities/videos', 'gcs');
+                $videoUrls[] = Storage::disk('gcs')->url($path);
+            }
+        }
+
+        return [$thumbUrl, $galleryUrls, $videoUrls];
     }
 }

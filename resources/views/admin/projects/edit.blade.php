@@ -50,8 +50,15 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700">Full Description</label>
-                        <textarea name="full_description" rows="6" required class="mt-2 block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm focus:border-[#00B3DB] focus:ring-[#00B3DB]">{{ old('full_description', $project->full_description) }}</textarea>
+                        <label class="block text-sm font-semibold text-slate-700 flex items-center justify-between gap-2">
+                            <span>Full Description (Markdown supported)</span>
+                            <button type="button" id="beautify-full-desc-edit" class="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#0A7396] hover:border-[#00B3DB] hover:text-[#00B3DB] transition">
+                                Beautify with AI
+                            </button>
+                        </label>
+                        <textarea name="full_description" id="full_description_edit" rows="8" required class="mt-2 block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm focus:border-[#00B3DB] focus:ring-[#00B3DB]">{{ old('full_description', $project->full_description) }}</textarea>
+                        <p class="mt-1 text-xs text-slate-500">Gunakan markdown untuk list, heading, dan link agar tampilan lebih rapi.</p>
+                        <p id="beautify-status-edit" class="mt-1 text-xs text-slate-500 hidden"></p>
                     </div>
 
                     <div>
@@ -111,6 +118,25 @@
                             </div>
                         </template>
                     </div>
+
+                    <div class="mt-4 space-y-3">
+                        <label class="block text-sm font-semibold text-slate-700">Videos</label>
+                        @if($project->videos)
+                            <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                                @foreach($project->videos as $video)
+                                    <label class="relative block rounded-lg border border-slate-200 bg-slate-50 p-2">
+                                        <video class="w-full rounded" controls>
+                                            <source src="{{ $video }}">
+                                        </video>
+                                        <input type="checkbox" name="delete_videos[]" value="{{ $video }}" class="absolute top-2 left-2 h-4 w-4">
+                                        <span class="absolute top-2 left-8 text-xs bg-white/80 px-2 py-0.5 rounded">Remove</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        @endif
+                        <input type="file" name="videos[]" multiple accept="video/mp4,video/webm,video/ogg" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                        <p class="text-xs text-slate-500">Max 20MB per video.</p>
+                    </div>
                 </div>
 
                 <div class="flex justify-end pt-2">
@@ -122,3 +148,53 @@
         </div>
     </div>
 </x-layouts.app>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('beautify-full-desc-edit');
+    const field = document.getElementById('full_description_edit');
+    const status = document.getElementById('beautify-status-edit');
+    if (!btn || !field || !status) return;
+
+    const defaultLabel = btn.innerHTML;
+    const setStatus = (msg, tone = 'muted') => {
+        status.classList.remove('hidden', 'text-red-600', 'text-green-600');
+        status.classList.add(tone === 'error' ? 'text-red-600' : (tone === 'success' ? 'text-green-600' : 'text-slate-500'));
+        status.textContent = msg;
+    };
+
+    btn.addEventListener('click', async () => {
+        const text = field.value.trim();
+        if (!text) {
+            setStatus('Isi dahulu deskripsi sebelum dibantu AI.', 'error');
+            return;
+        }
+        btn.disabled = true;
+        btn.innerHTML = '<svg class="w-4 h-4 animate-spin text-[#0A7396]" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span> Beautifying...</span>';
+        setStatus('Meminta AI merapikan deskripsi...', 'muted');
+        try {
+            const res = await fetch('{{ route('admin.projects.beautify') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify({ text })
+            });
+            const data = await res.json();
+            if (res.ok && data.markdown) {
+                field.value = data.markdown;
+                setStatus('Berhasil! Teks sudah dirapikan.', 'success');
+            } else {
+                setStatus(data.error || 'Gagal memproses teks dengan AI.', 'error');
+            }
+        } catch (err) {
+            setStatus('Terjadi kesalahan saat menghubungi AI.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = defaultLabel;
+        }
+    });
+});
+</script>

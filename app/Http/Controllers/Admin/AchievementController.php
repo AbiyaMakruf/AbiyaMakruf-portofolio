@@ -96,9 +96,9 @@ class AchievementController extends Controller
             'description' => 'nullable|string',
             'date' => 'nullable|date',
             'certificate' => 'nullable|file|mimes:pdf,png,jpg,jpeg,webp|max:5120',
-            'image' => 'nullable|image|max:4096',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'nullable|image|max:4096',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
     }
 

@@ -10,7 +10,7 @@
         </div>
 
         <div class="rounded-2xl border border-slate-100 bg-white/95 p-6 shadow-xl shadow-[#00B3DB]/10">
-            <form action="{{ route('admin.skills.store') }}" method="POST" class="space-y-5">
+            <form action="{{ route('admin.skills.store') }}" method="POST" class="space-y-5" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <label class="block text-sm font-semibold text-slate-700">Name</label>
@@ -25,13 +25,19 @@
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700">Level</label>
-                        <input type="text" name="level" value="{{ old('level') }}" placeholder="Beginner / Intermediate / Advanced" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm focus:border-[#00B3DB] focus:ring-[#00B3DB]">
+                        <select name="level" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm focus:border-[#00B3DB] focus:ring-[#00B3DB]">
+                            <option value="">Select level (optional)</option>
+                            @foreach(['Beginner','Intermediate','Advanced','Expert'] as $level)
+                                <option value="{{ $level }}" @selected(old('level') === $level)>{{ $level }}</option>
+                            @endforeach
+                        </select>
                         @error('level') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700">Icon URL (optional)</label>
-                        <input type="url" name="icon_path" value="{{ old('icon_path') }}" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm focus:border-[#00B3DB] focus:ring-[#00B3DB]">
-                        @error('icon_path') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
+                        <label class="block text-sm font-semibold text-slate-700">Icon (optional)</label>
+                        <input type="file" name="icon" accept=".jpg,.jpeg,.png,.webp,.gif,.svg" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm focus:border-[#00B3DB] focus:ring-[#00B3DB]">
+                        <p class="mt-1 text-xs text-slate-500">Upload an icon image (JPG, PNG, WebP, GIF, SVG) to store in GCS.</p>
+                        @error('icon') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
                 </div>
                 <div class="flex justify-end">
