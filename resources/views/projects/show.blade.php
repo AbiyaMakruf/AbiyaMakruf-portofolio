@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Str; @endphp
 <x-layouts.main :title="$project->title . ' - Abiya Makruf'">
     <div class="bg-white py-24">
         <div class="mx-auto max-w-4xl px-6">
@@ -39,8 +40,8 @@
 
             <h1 class="mb-6 text-4xl font-bold text-[#125C78]">{{ $project->title }}</h1>
 
-            <div class="prose prose-lg prose-slate max-w-none">
-                {!! nl2br(e($project->full_description)) !!}
+            <div class="prose prose-lg prose-slate max-w-none prose-ul:pl-6 prose-ol:pl-6 prose-li:marker:text-[#0A7396] prose-li:leading-relaxed prose-h1:text-4xl prose-h1:font-bold prose-h2:text-3xl prose-h2:font-bold prose-h3:text-2xl prose-h3:font-semibold prose-h4:text-xl prose-h4:font-semibold prose-blockquote:border-l-4 prose-blockquote:border-[#0A7396]/40 prose-blockquote:text-slate-700">
+                {!! Str::markdown($project->full_description) !!}
             </div>
 
             @if($project->tech_stack)
