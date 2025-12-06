@@ -19,16 +19,6 @@
                     </div>
                 @endif
 
-                @if($experience->gallery && count($experience->gallery))
-                    <div class="grid gap-3 p-4 sm:grid-cols-2">
-                        @foreach($experience->gallery as $image)
-                            <div class="overflow-hidden rounded-xl border border-slate-100">
-                                <img src="{{ $image }}" alt="{{ $experience->role }} image" class="h-56 w-full object-cover">
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
                 <div class="p-8 space-y-6">
                     <div class="flex flex-wrap items-start justify-between gap-3">
                         <div>
@@ -58,6 +48,19 @@
                                     </li>
                                 @endforeach
                             </ul>
+                        </div>
+                    @endif
+
+                    @if($experience->gallery && count($experience->gallery))
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-semibold text-[#0A7396]">Gallery</h3>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach($experience->gallery as $image)
+                                    <div class="overflow-hidden rounded-xl border border-slate-100 bg-slate-50">
+                                        <img src="{{ $image }}" alt="{{ $experience->role }} image" class="h-56 w-full object-cover">
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     @endif
                 </div>
