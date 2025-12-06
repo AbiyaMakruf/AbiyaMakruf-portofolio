@@ -40,11 +40,12 @@
                                 <img src="{{ $achievement->image_path }}" alt="{{ $achievement->title }}" class="h-40 w-full object-contain bg-slate-50">
                             @endif
                             <div class="p-6 space-y-3">
-                                <div class="flex items-center gap-2 text-xs text-slate-500">
+                                <div class="flex items-center gap-3 text-xs text-slate-500">
                                     <span class="font-semibold text-[#0A7396]">{{ $achievement->date?->format('d M Y') ?? 'No date' }}</span>
                                     @if($achievement->certificate_url)
-                                        <span>&bull;</span>
-                                        <a href="{{ $achievement->certificate_url }}" target="_blank" class="text-[#00B3DB] hover:underline">Certificate</a>
+                                        <a href="{{ $achievement->certificate_url }}" target="_blank" class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-[#0A7396] shadow-sm transition hover:-translate-y-0.5 hover:border-[#00B3DB] hover:text-[#00B3DB]">
+                                            View Certificate →
+                                        </a>
                                     @endif
                                 </div>
                                 <h3 class="text-lg font-bold text-slate-800">{{ $achievement->title }}</h3>
@@ -68,6 +69,12 @@
                                         </div>
                                     @endif
                                     <p class="text-xs text-slate-500">{{ $achievement->date?->format('d M Y') ?? 'No date' }}</p>
+                                    @if($achievement->certificate_url)
+                                        <a href="{{ $achievement->certificate_url }}" target="_blank" class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#0A7396] shadow-sm transition hover:-translate-y-0.5 hover:border-[#00B3DB] hover:text-[#00B3DB]">
+                                            View Certificate
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    @endif
                                     <p class="text-slate-700 leading-relaxed">{{ $achievement->description }}</p>
                                     @if($achievement->gallery)
                                         <div class="grid gap-3 grid-cols-2 sm:grid-cols-3">
@@ -115,11 +122,12 @@
                                 <img src="{{ $pub->certificate_image_path }}" alt="{{ $pub->title }}" class="h-40 w-full object-contain bg-slate-50">
                             @endif
                             <div class="p-6 space-y-3">
-                                <div class="flex items-center gap-2 text-xs text-slate-500">
+                                <div class="flex items-center gap-3 text-xs text-slate-500">
                                     <span class="font-semibold text-[#0A7396]">{{ $pub->published_at?->format('d M Y') ?? 'No date' }}</span>
                                     @if($pub->doi_url)
-                                        <span>&bull;</span>
-                                        <a href="{{ $pub->doi_url }}" target="_blank" class="text-[#00B3DB] hover:underline">DOI</a>
+                                        <a href="{{ $pub->doi_url }}" target="_blank" class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-[#0A7396] shadow-sm transition hover:-translate-y-0.5 hover:border-[#00B3DB] hover:text-[#00B3DB]">
+                                            View Paper →
+                                        </a>
                                     @endif
                                 </div>
                                 <h3 class="text-lg font-bold text-slate-800">{{ $pub->title }}</h3>
@@ -142,6 +150,12 @@
                                         </div>
                                     @endif
                                     <p class="text-xs text-slate-500">{{ $pub->published_at?->format('d M Y') ?? 'No date' }}</p>
+                                    @if($pub->doi_url)
+                                        <a href="{{ $pub->doi_url }}" target="_blank" class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#0A7396] shadow-sm transition hover:-translate-y-0.5 hover:border-[#00B3DB] hover:text-[#00B3DB]">
+                                            View Paper
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    @endif
                                     <p class="text-slate-700 leading-relaxed">{{ $pub->description }}</p>
                                     @if($pub->gallery)
                                         <div class="grid gap-3 grid-cols-2 sm:grid-cols-3">
