@@ -380,15 +380,15 @@
 
                     <!-- Input Form -->
                     <form class="space-y-4" @submit.prevent="ask()">
-                        <div class="flex gap-3">
+                        <div class="flex flex-col sm:flex-row gap-3">
                             <input x-ref="input" 
                                    type="text" 
                                    x-model="question" 
                                    placeholder="e.g., What technologies do you work with?" 
-                                   class="flex-1 px-5 py-4 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 text-zinc-900 placeholder-zinc-500 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all duration-200 bg-white/80">
+                                   class="flex-1 px-5 py-4 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 text-zinc-900 placeholder-zinc-500 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all duration-200 bg-white/80 w-full">
                             <button type="submit" 
                                     :disabled="loading || !question.trim()" 
-                                    class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 flex items-center gap-2 whitespace-nowrap">
+                                    class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 flex items-center gap-2 whitespace-nowrap w-full sm:w-auto justify-center">
                                 <span x-show="!loading">Ask AI</span>
                                 <span x-show="loading" class="flex items-center gap-2">
                                     <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
